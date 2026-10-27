@@ -1,8 +1,6 @@
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
-  const DEMO_EMAIL = 'admin@maro.bf';
-  const DEMO_PASSWORD = 'admin123'; // Prototype only. Replace with Supabase Auth before publication.
   const STORE_PRODUCTS_KEY = 'maro_p';
   const STORE_SETTINGS_KEY = 'maro_s';
   const DEFAULT_SETTINGS = {wa:'2130670462357', adresse:'Koulouba, Ouagadougou', horaires:'Lun-Sam : 08h-20h', aproposTitre:'Votre expert mobile', aproposTexte:'Vente et Troc sécurisés.', annonce:'', facebook:'', instagram:''};
@@ -26,8 +24,37 @@
   function saveProducts() { write(STORE_PRODUCTS_KEY, products); renderProducts(); renderStats(); }
   function showToast(message) { const el=$('toast'); el.textContent=message; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),2500); }
   function showDashboard() { $('login-panel').hidden=true; $('dashboard').hidden=false; renderProducts(); renderStats(); fillSettings(); }
-  function logout() { sessionStorage.removeItem('maro_admin_demo_session'); $('dashboard').hidden=true; $('login-panel').hidden=false; $('login-password').value=''; }
-  $('login-form').addEventListener('submit', e => { e.preventDefault(); const email=$('login-email').value.trim().toLowerCase(); const password=$('login-password').value; if(email===DEMO_EMAIL && password===DEMO_PASSWORD){sessionStorage.setItem('maro_admin_demo_session','1'); $('login-error').hidden=true; showDashboard();} else {$('login-error').hidden=false;} });
+
+  // MODIFICATION SUPABASE : Déconnexion
+  async function logout() { 
+      await supabase.auth.signOut();
+      sessionStorage.removeItem('maro_admin_token'); 
+      $('dashboard').hidden=true; 
+      $('login-panel').hidden=false; 
+      $('login-password').value=''; 
+  }
+
+  // MODIFICATION SUPABASE : Connexion sécurisée
+  $('login-form').addEventListener('submit', async e => { 
+      e.preventDefault(); 
+      const email = $('login-email').value.trim().toLowerCase(); 
+      const password = $('login-password').value; 
+      
+      const { data, error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password,
+      });
+
+      if (error) {
+          $('login-error').textContent = "Erreur : " + error.message;
+          $('login-error').hidden = false;
+      } else {
+          sessionStorage.setItem('maro_admin_token', data.session.access_token); 
+          $('login-error').hidden = true; 
+          showDashboard();
+      } 
+  });
+
   $('logout-button').addEventListener('click', logout);
   document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b===button)); document.querySelectorAll('.tab-panel').forEach(p=>p.hidden=p.id!==`tab-${button.dataset.tab}`); }));
   function renderStats(){ $('stat-products').textContent=products.length; $('stat-visible').textContent=products.filter(p=>p.visible!==false).length; }
@@ -61,6 +88,8 @@
   });
   function fillSettings(){const f=$('settings-form');f.elements.storeName.value=settings.storeName||'MARO BRUTAF TECH';['wa','adresse','horaires','aproposTitre','aproposTexte','annonce','facebook','instagram'].forEach(k=>{if(f.elements[k])f.elements[k].value=settings[k]||'';});}
   $('settings-form').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;settings={...settings,storeName:f.elements.storeName.value.trim(),wa:f.elements.wa.value.trim(),adresse:f.elements.adresse.value.trim(),horaires:f.elements.horaires.value.trim(),aproposTitre:f.elements.aproposTitre.value.trim(),aproposTexte:f.elements.aproposTexte.value.trim(),annonce:f.elements.annonce.value.trim(),facebook:f.elements.facebook.value.trim(),instagram:f.elements.instagram.value.trim()};write(STORE_SETTINGS_KEY,settings);$('settings-feedback').textContent='Enregistré sur cet appareil.';showToast('Informations enregistrées.');setTimeout(()=>$('settings-feedback').textContent='',3500);});
-  // Open the public shop after logout; the current static prototype uses localStorage shared by pages on the same origin.
-  loadData(); if(sessionStorage.getItem('maro_admin_demo_session')==='1')showDashboard();
+  
+  // MODIFICATION SUPABASE : Vérification de la session active
+  loadData(); 
+  if(sessionStorage.getItem('maro_admin_token')) showDashboard();
 })();
