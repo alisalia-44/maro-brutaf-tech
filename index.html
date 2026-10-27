@@ -333,10 +333,61 @@ const P0 = [
 let produits = [], SET = {...SET0}, panier = [];
 function lire(k, def){ try{ return JSON.parse(localStorage.getItem("maro_" + k)) ?? def; }catch{ return def; } }
 function ecrire(k, v){ try{ localStorage.setItem("maro_" + k, JSON.stringify(v)); }catch{} }
+
 async function chargerDonnees(){
-    let p = lire("p", null); if(!Array.isArray(p)) p = P0;
-    produits = p; SET = {...SET0, ...lire("s", {})}; panier = lire("c", []) || [];
-    $("stat-prods").textContent = produits.length;
+    // Le panier reste stocké localement sur le téléphone du client
+    panier = lire("c", []) || []; 
+
+    // 1. Récupération des vrais produits depuis Supabase
+    const { data: dbProducts, error: errP } = await supabase
+        .from('products')
+        .select('*')
+        .order('id', { ascending: false });
+        
+    if (!errP && dbProducts) {
+        produits = dbProducts.map(dbP => ({
+            id: dbP.id,
+            cat: dbP.category,
+            marque: dbP.brand,
+            modele: dbP.model,
+            etat: dbP.condition_label,
+            desc: dbP.description,
+            image: dbP.image_url,
+            specs: dbP.specs,
+            cap: dbP.capacities,
+            col: dbP.colors,
+            nouveau: dbP.is_new,
+            troc: dbP.trade_in,
+            visible: dbP.is_visible
+        }));
+    } else {
+        produits = [];
+        console.error("Erreur de chargement des produits :", errP);
+    }
+
+    // 2. Récupération des paramètres de la boutique
+    const { data: dbSettings, error: errS } = await supabase
+        .from('store_settings')
+        .select('*')
+        .single();
+        
+    if (!errS && dbSettings) {
+        SET = {
+            storeName: dbSettings.store_name,
+            wa: dbSettings.whatsapp,
+            adresse: dbSettings.address,
+            horaires: dbSettings.opening_hours,
+            aproposTitre: dbSettings.about_title,
+            aproposTexte: dbSettings.about_text,
+            annonce: dbSettings.announcement,
+            facebook: dbSettings.facebook_url,
+            instagram: dbSettings.instagram_url
+        };
+    } else {
+        SET = {...SET0};
+    }
+    
+    if($("stat-prods")) $("stat-prods").textContent = produits.length;
 }
 
 const prod = id => produits.find(x => x.id == id);
