@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>MARO BRUTAF TECH · Téléphones & Accessoires</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>tailwind.config={theme:{extend:{colors:{gold:{400:'#f6e3a1',500:'#d4af37',600:'#a07c2c'},dark:{900:'#0a0a0a',800:'#121212',700:'#1a1a1a',600:'#2a2a2d'}}}}}</script>
+<style>
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#0a0a0a}::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
+.glass-nav{background:rgba(10,10,10,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
+.view-section{display:none}.view-section.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.cap-radio:checked+label{border-color:#d4af37;color:#d4af37;background:rgba(212,175,55,.1)}
+.color-radio:checked+label{border:2px solid #d4af37;transform:scale(1.1)}
+.inp{width:100%;background:#0a0a0a;border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:.75rem;padding:.75rem 1rem;font-size:.875rem}
+.inp:focus{outline:none;border-color:#d4af37}
+.btn{display:flex;align-items:center;justify-content:center;gap:.5rem;font-weight:700;border-radius:.75rem;padding:.875rem 1.5rem;transition:.2s}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.b-gold{background:#d4af37;color:#000}.b-gold:hover:not(:disabled){background:#f6e3a1}
+.b-out{border:2px solid #d4af37;color:#d4af37}.b-out:hover{background:rgba(212,175,55,.1)}
+.b-wh{background:#fff;color:#000}.b-wh:hover:not(:disabled){background:#e5e5e5}
+.panel{background:#121212;border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;overflow:hidden}
+.lbl{display:block;font-size:.75rem;font-weight:600;color:#9ca3af;text-transform:uppercase;margin:.9rem 0 .25rem}
+.ic{width:1em;height:1em;display:inline-block;vertical-align:-.125em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* Hero Image Glow */
+.hero-glow::before { content:''; position:absolute; inset:-20px; background:radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%); z-index:-1; border-radius:50%; }
+</style>
+</head>
+<body class="bg-dark-900 text-gray-200 antialiased flex flex-col min-h-screen">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 10.2a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.5L20 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></symbol>
+<symbol id="i-rotate" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.6L4 16M4 20v-4h4"/></symbol>
+<symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+<symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 3.5 6.5 6.5 6.5l.9-1.9-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2.1z"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+<symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+</defs></svg>
+
+<!-- ========================================== -->
+<!-- BRANCHE 1 : BOUTIQUE PUBLIQUE              -->
+<!-- ========================================== -->
+<div id="layout-public" class="flex flex-col min-h-screen w-full">
+    
+    <div id="topbar" class="hidden bg-black border-b border-white/5 py-2 px-4 text-center"><p id="annonce" class="text-gold-500 text-xs font-medium tracking-wider uppercase"></p></div>
+
+    <nav class="glass-nav sticky top-0 z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 md:h-20">
+            <button id="brand-nav" onclick="naviguerVers('accueil')" class="text-2xl font-extrabold tracking-tighter text-white">MARO BRUTAF<span class="text-gold-500">.</span></button>
+            <div class="hidden md:flex items-center space-x-8">
+                <button class="nav-link text-sm font-medium" data-target="accueil" onclick="naviguerVers('accueil')">Accueil</button>
+                <button class="nav-link text-sm font-medium" data-target="boutique" onclick="naviguerVers('boutique')">Boutique</button>
+                <button class="nav-link text-sm font-medium" data-target="contact" onclick="naviguerVers('contact')">Contact</button>
+                <button class="nav-link text-sm font-medium" data-target="apropos" onclick="naviguerVers('apropos')">À propos</button>
+                <button onclick="ouvrirTroc(null)" class="text-sm font-bold text-gold-500 hover:text-gold-400 transition"><svg class="ic"><use href="#i-rotate"/></svg> Proposer un troc</button>
+            </div>
+            <button onclick="ouvrirCart()" class="flex items-center gap-2 bg-dark-800 border border-white/10 rounded-full px-4 py-2 hover:bg-dark-700 transition" aria-label="Panier">
+                <svg class="ic text-gray-300"><use href="#i-cart"/></svg><span class="hidden sm:inline text-sm font-medium text-white">Panier</span>
+                <span id="badge-panier" class="hidden bg-gold-500 text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+            </button>
+        </div>
+        <div class="md:hidden flex justify-around border-t border-white/5 py-2 text-sm overflow-x-auto whitespace-nowrap px-2">
+            <button class="nav-link px-3" data-target="accueil" onclick="naviguerVers('accueil')">Accueil</button>
+            <button class="nav-link px-3" data-target="boutique" onclick="naviguerVers('boutique')">Boutique</button>
+            <button class="nav-link px-3" data-target="contact" onclick="naviguerVers('contact')">Contact</button>
+            <button class="nav-link px-3" data-target="apropos" onclick="naviguerVers('apropos')">À propos</button>
+            <button onclick="ouvrirTroc(null)" class="text-gold-500 font-semibold px-3">Troc</button>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <!-- VUE : ACCUEIL -->
+        <section id="vue-accueil" class="view-section active">
+            <div class="pt-20 pb-24 border-b border-white/5 bg-gradient-to-b from-dark-800 to-dark-900 overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 text-left z-10">
+                        <span class="inline-block py-1 px-3 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-500 text-xs font-bold tracking-wide uppercase mb-6">Ouagadougou</span>
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-tight">Votre prochain smartphone<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-yellow-700">commandé sur WhatsApp.</span></h1>
+                        <p class="text-lg text-gray-400 mb-10 max-w-xl">Découvrez nos téléphones neufs et d'occasion, commandez en quelques clics ou proposez un échange.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="naviguerVers('boutique')" class="btn b-gold rounded-full px-8">Voir la boutique</button>
+                            <button onclick="ouvrirTroc(null)" class="btn b-out rounded-full px-8"><svg class="ic"><use href="#i-rotate"/></svg> Faire un troc</button>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 relative flex justify-center hero-glow">
+                        <!-- IMAGE images.jpg REQUISE ICI -->
+                        <img src="images.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=100'" alt="Smartphone" class="relative z-10 w-full max-w-[320px] lg:max-w-[400px] object-contain drop-shadow-2xl transform hover:scale-105 transition duration-700">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-dark-800/30"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="flex justify-between items-end mb-8">
+                    <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider border-b-2 border-gold-500 pb-2 inline-block">Nouveautés</h2>
+                    <button onclick="filtrerEtNaviguer('tous')" class="text-gold-500 hover:text-white text-sm font-semibold">Toute la boutique <svg class="ic ml-1"><use href="#i-arrow-right"/></svg></button>
+                </div>
+                <div id="grille-nouveautes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div></div>
+        </section>
+
+        <!-- VUE : BOUTIQUE -->
+        <section id="vue-boutique" class="view-section pb-20">
+            <div class="bg-black py-12 border-b border-white/5 mb-8"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl font-extrabold text-white mb-2 uppercase tracking-tight">Boutique</h1>
+                <p class="text-gray-400">Choisissez votre produit, sa capacité et sa couleur.</p>
+            </div></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-wrap gap-3 mb-6" id="filtres-pilules"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-10">
+                    <input type="search" id="filtre-recherche" placeholder="Rechercher un produit" class="inp" aria-label="Rechercher">
+                    <select id="filtre-etat" class="inp" aria-label="État"><option value="">Tous les états</option><option value="neuf">Neuf scellé</option><option value="venue">Venue (très propre)</option><option value="occasion">Occasion</option></select>
+                    <select id="filtre-prix" class="inp" aria-label="Budget"><option value="0">Tous les prix</option><option value="150000">Moins de 150 000 FCFA</option><option value="300000">Moins de 300 000 FCFA</option><option value="600000">Moins de 600 000 FCFA</option></select>
+                    <div class="inp text-gray-400 flex items-center bg-dark-900 border-none" id="compteur-produits">0 produit</div>
+                </div>
+                <div id="grille-produits" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- VUE : CONTACT -->
+        <section id="vue-contact" class="view-section pb-20">
+            <div class="bg-black py-12 border-b border-white/5 mb-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-4xl font-extrabold text-white mb-2 uppercase tracking-tight">Contact</h1>
+                <p class="text-gray-400">Échangeons sur WhatsApp ou passez nous voir en boutique.</p>
+            </div></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div class="bg-dark-800 border border-white/5 rounded-3xl p-8">
+                        <h2 class="text-2xl font-bold text-white mb-6 uppercase">Discuter avec le gérant</h2>
+                        <p class="text-gray-400 mb-8 leading-relaxed">Vous cherchez un modèle précis, vous avez une question sur un troc, ou vous souhaitez valider une commande ? Notre équipe vous répond immédiatement sur WhatsApp.</p>
+                        <button onclick="redirigerWhatsApp('Bonjour, j\'ai une question concernant vos téléphones.')" class="btn b-gold w-full py-4 text-lg"><svg class="ic text-2xl"><use href="#i-whatsapp"/></svg> Ouvrir WhatsApp</button>
+                    </div>
+                    <div class="bg-dark-800 border border-white/5 rounded-3xl p-8">
+                        <h2 class="text-2xl font-bold text-white mb-6 uppercase">Informations utiles</h2>
+                        <dl id="contact-infos" class="space-y-4 text-sm text-gray-300"></dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VUE : A PROPOS -->
+        <section id="vue-apropos" class="view-section pb-20">
+            <div class="bg-black py-12 border-b border-white/5 mb-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><h1 class="text-4xl font-extrabold text-white mb-2 uppercase tracking-tight">À propos</h1></div></div>
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 id="ap-titre" class="text-3xl font-extrabold text-white mb-6"></h2>
+                <div id="ap-texte" class="text-gray-400 leading-relaxed space-y-4 max-w-3xl"></div>
+                <div id="ap-points" class="grid sm:grid-cols-3 gap-8 mt-14"></div>
+            </div>
+        </section>
+
+        <!-- VUE : DETAILS PRODUIT -->
+        <section id="vue-details" class="view-section pb-20">
+            <div class="bg-black py-4 border-b border-white/5 mb-8"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-gray-400">
+                <button onclick="naviguerVers('accueil')" class="hover:text-white">Accueil</button> / <button onclick="naviguerVers('boutique')" class="hover:text-white">Boutique</button> / <span class="text-gold-500" id="dt-ariane-nom"></span>
+            </div></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-12 mb-16">
+                    <div class="lg:w-1/2"><div class="bg-white rounded-3xl p-8 flex justify-center items-center h-[420px] lg:h-[500px] shadow-2xl relative">
+                        <!-- Etiquettes détails superposées sur l'image pour la clarté -->
+                        <div id="dt-badges" class="absolute top-6 left-6 flex flex-col items-start gap-2"></div>
+                        <img id="dt-image-main" src="" alt="" class="max-h-full max-w-full object-contain">
+                    </div></div>
+                    <div class="lg:w-1/2 flex flex-col justify-center">
+                        <h1 class="text-4xl font-extrabold text-white mb-2 tracking-tight" id="dt-nom"></h1>
+                        <p class="text-sm mb-2" id="dt-stock"></p>
+                        <div class="text-4xl font-black text-gold-500 mb-8" id="dt-prix"></div>
+                        <div class="space-y-6 mb-8">
+                            <div id="dt-bloc-sim"><p class="text-sm font-semibold text-white mb-2">Type de SIM</p><div class="inline-block bg-dark-800 border border-white/10 rounded-lg px-4 py-2 text-sm text-gray-300" id="dt-sim"></div></div>
+                            <div id="dt-bloc-cap"><p class="text-sm font-semibold text-white mb-2">Capacité</p><div class="flex flex-wrap gap-3" id="dt-capacites"></div></div>
+                            <div id="dt-bloc-couleur"><p class="text-sm font-semibold text-white mb-2" id="dt-col-nom">Couleur</p><div class="flex gap-3" id="dt-couleurs"></div></div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/10">
+                            <div class="flex items-center bg-dark-800 border border-white/10 rounded-xl h-14">
+                                <button class="px-4 text-gray-400 hover:text-white" onclick="chgQty(-1)" aria-label="Moins">-</button>
+                                <input id="dt-qty" value="1" class="w-12 bg-transparent text-center text-white font-bold focus:outline-none" readonly aria-label="Quantité">
+                                <button class="px-4 text-gray-400 hover:text-white" onclick="chgQty(1)" aria-label="Plus">+</button>
+                            </div>
+                            <button id="btn-add-cart" class="btn b-wh flex-1 h-14">Ajouter au panier</button>
+                        </div>
+                        <div class="flex gap-4 mt-4">
+                            <button id="btn-buy-now" class="btn b-gold flex-1 h-14"></button>
+                            <button id="btn-dt-troc" onclick="ouvrirTroc(produitActifId)" class="btn b-out flex-1 h-14"><svg class="ic"><use href="#i-rotate"/></svg> Troc</button>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-4 text-center flex items-center justify-center gap-1.5"><svg class="ic text-green-500"><use href="#i-cart"/></svg> Test sur place avant paiement • Orange Money / Moov / Cash</p>
+                    </div>
+                </div>
+                <div class="border-t border-white/10 pt-16">
+                    <h2 class="text-2xl font-bold text-white mb-8 uppercase tracking-wider">Caractéristiques</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <div class="md:col-span-2 space-y-4" id="dt-specs-list"></div>
+                        <div class="bg-dark-800 rounded-3xl p-8 border border-white/5 self-start"><h3 class="text-lg font-bold text-white mb-4 uppercase">À propos</h3><p class="text-gray-400 text-sm leading-relaxed" id="dt-desc"></p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black border-t border-white/5 py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div id="brand-footer" class="text-2xl font-extrabold tracking-tighter text-white">MARO BRUTAF<span class="text-gold-500">.</span></div>
+            <p class="text-gray-500 text-sm text-center" id="ft-info"></p>
+            <div class="flex gap-4 items-center">
+                <span id="ft-social" class="flex gap-4 text-gray-500"></span>
+                <a href="admin.html" title="Espace gérant" aria-label="Espace gérant" class="text-gray-700 hover:text-gray-400 ml-4 text-xs flex items-center gap-2"><svg class="ic"><use href="#i-lock"/></svg><span class="hidden sm:inline">Espace gérant</span></a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- ========================================== -->
+<!-- BRANCHE 2 : ADMINISTRATION (PROTEGÉE)      -->
+<!-- ========================================== -->
+<div id="layout-admin" class="hidden flex-col min-h-screen w-full bg-dark-900">
+    
+    <!-- LOGIN ECRAN -->
+    <section id="vue-login" class="flex-grow flex items-center justify-center px-4">
+        <div class="panel p-8 w-full max-w-md shadow-2xl border-white/10 border">
+            <div class="text-center mb-8">
+                <svg class="ic text-4xl text-gold-500 mb-4 mx-auto"><use href="#i-lock"/></svg>
+                <h1 class="text-2xl font-extrabold text-white mb-1">Accès Restreint</h1>
+                <p class="text-sm text-gray-400">Vérification du compte Gérant</p>
+                <p class="text-xs text-gold-500 mt-2">Test: admin@maro.bf / admin</p>
+            </div>
+            <form id="f-login" class="space-y-4">
+                <div><label class="lbl" for="l-mail">Email</label><input id="l-mail" type="email" required class="inp" autocomplete="username"></div>
+                <div><label class="lbl" for="l-mdp">Mot de passe</label><input id="l-mdp" type="password" required class="inp" autocomplete="current-password"></div>
+                <button type="submit" class="btn b-gold w-full mt-2">Se connecter</button>
+                <a href="#" class="block text-center text-xs text-gray-500 hover:text-white mt-4">← Retour à la boutique</a>
+            </form>
+        </div>
+    </section>
+
+    <!-- DASHBOARD GÉRANT -->
+    <section id="vue-dashboard" class="hidden flex-grow flex-col">
+        <nav class="bg-black border-b border-white/5 py-4 px-6 flex justify-between items-center sticky top-0 z-40">
+            <div class="text-xl font-bold text-white flex items-center gap-2"><svg class="ic text-gold-500"><use href="#i-settings"/></svg> Tableau de bord Admin</div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="text-sm text-gray-400 hover:text-white flex items-center gap-1"><svg class="ic"><use href="#i-rotate"/></svg> Voir la boutique</a>
+                <button onclick="logoutAdmin()" class="btn border border-white/10 hover:bg-white/5 text-white py-2 px-4 rounded-lg text-sm font-medium"><svg class="ic"><use href="#i-logout"/></svg> Déconnexion</button>
+            </div>
+        </nav>
+        <div class="max-w-6xl mx-auto px-4 py-8 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-dark-800 p-6 rounded-2xl border border-white/5">
+                    <h3 class="text-gray-400 text-sm font-medium mb-1">Produits en base</h3>
+                    <p class="text-3xl font-bold text-white" id="stat-prods">0</p>
+                </div>
+            </div>
+            
+            <div class="bg-dark-800 rounded-3xl border border-white/5 overflow-hidden">
+                <div class="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-dark-900/50">
+                    <h2 class="text-lg font-bold text-white">Gestion des prix</h2>
+                    <span class="text-xs text-gray-500">Les modifications sont appliquées instantanément.</span>
+                </div>
+                <div class="p-6">
+                    <div id="adm-liste" class="space-y-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ========================================== -->
+<!-- MODALES COMMUNES                           -->
+<!-- ========================================== -->
+<dialog id="modal-panier" class="bg-transparent m-auto p-4 w-full max-w-lg"><div class="panel">
+    <div class="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-dark-900"><h3 class="text-xl font-bold text-white"><svg class="ic text-gold-500"><use href="#i-cart"/></svg> Votre panier</h3><button onclick="fermerModal('modal-panier')" class="text-gray-400 hover:text-white" aria-label="Fermer"><svg class="ic text-xl"><use href="#i-close"/></svg></button></div>
+    <div class="p-6">
+        <div id="panier-liste" class="space-y-3 max-h-[40vh] overflow-y-auto mb-4"></div>
+        <p id="panier-vide" class="text-center py-8 text-gray-400">Votre panier est vide.</p>
+        <div id="panier-formulaire" class="border-t border-white/5 pt-5">
+            <div class="flex justify-between items-center mb-4"><span class="text-gray-400">Total</span><span id="panier-total" class="text-2xl font-bold text-gold-500"></span></div>
+            <form onsubmit="validerCommande(event)" class="space-y-3">
+                <input id="c-nom" required placeholder="Votre nom et prénom" class="inp" autocomplete="name">
+                <input id="c-quartier" placeholder="Quartier ou remarque (facultatif)" class="inp">
+                <button class="btn b-gold w-full"><svg class="ic text-lg"><use href="#i-whatsapp"/></svg> Envoyer ma commande</button>
+                <button type="button" onclick="viderPanier()" class="w-full text-sm text-gray-500 hover:text-red-400">Vider le panier</button>
+            </form>
+        </div>
+    </div>
+</div></dialog>
+
+<dialog id="modal-troc" class="bg-transparent m-auto p-4 w-full max-w-lg"><div class="panel">
+    <div class="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-dark-900"><h3 class="text-xl font-bold text-white"><svg class="ic text-gold-500"><use href="#i-rotate"/></svg> Proposer un troc</h3><button onclick="fermerModal('modal-troc')" class="text-gray-400 hover:text-white" aria-label="Fermer"><svg class="ic text-xl"><use href="#i-close"/></svg></button></div>
+    <div class="p-6">
+        <p class="text-sm text-gray-400 mb-2">Indiquez le téléphone souhaité, puis décrivez le vôtre.</p>
+        <form id="f-troc" onsubmit="validerTroc(event)">
+            <label class="lbl" for="t-cible">Téléphone que vous souhaitez</label><select id="t-cible" required class="inp" onchange="majTrocAutre()"></select><input id="t-autre" class="inp mt-2 hidden" placeholder="Précisez le modèle souhaité" aria-label="Modèle souhaité">
+            <label class="lbl" for="t-mod">Téléphone que vous donnez</label><input id="t-mod" required placeholder="iPhone 11, 128 Go" class="inp">
+            <div class="grid grid-cols-2 gap-4">
+                <div><label class="lbl" for="t-etat">État</label><select id="t-etat" class="inp"><option>Très propre</option><option>Rayures d'usage</option><option>Fissuré ou défaut</option></select></div>
+                <div><label class="lbl" for="t-bat">Batterie (%)</label><input id="t-bat" type="number" min="0" max="100" placeholder="86" class="inp"></div>
+            </div>
+            <label class="lbl" for="t-plus">Somme que vous ajoutez (FCFA)</label><input id="t-plus" type="number" min="0" required placeholder="85000" class="inp">
+            <button class="btn b-gold w-full mt-5"><svg class="ic text-lg"><use href="#i-whatsapp"/></svg> Envoyer l'offre</button>
+        </form>
+    </div>
+</div></dialog>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fcfa = n => Number(n).toLocaleString("fr-FR") + " FCFA";
+const num = x => parseInt(String(x ?? "").replace(/\D/g, ""), 10) || 0;
+const NOIMG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 230"><rect x="10" y="4" width="100" height="222" rx="22" fill="#c9c9ce"/><circle cx="60" cy="30" r="9" fill="#888"/></svg>');
+const ETAT = {neuf:"Neuf scellé", venue:"Venue (très propre)", occasion:"Occasion"};
+const CATS = {iphone:"iPhone", android:"Téléphones Android", accessoires:"Accessoires"};
+
+/* DATABASE MOCKUP */
+const SET0 = {storeName:"MARO BRUTAF TECH", wa:"2130670462357", adresse:"Koulouba, Ouagadougou", horaires:"Lun-Sam : 08h-20h", aproposTitre:"Votre expert mobile", aproposTexte:"Vente et Troc sécurisés."};
+const P0 = [
+ {id:1,cat:"iphone",marque:"Apple",modele:"iPhone 16 Pro Max",etat:"neuf",nouveau:true,troc:true,visible:true,image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
+  desc:"Téléphone authentique, scellé dans sa boîte. Vendu avec garantie boutique.",specs:{"Écran":"6.7 pouces OLED 120 Hz","SIM":"Nano SIM + eSIM","RAM":"8 Go","Garantie":"12 mois boutique"},
+  cap:[{c:"256 Go",p:925000,s:1},{c:"512 Go",p:1050000,s:1}],col:[{n:"Titane Noir",h:"#333333"},{n:"Titane Blanc",h:"#e3e3e3"}]},
+ {id:2,cat:"iphone",marque:"Apple",modele:"iPhone 15 Pro",etat:"venue",nouveau:true,troc:true,visible:true,image:"https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&w=800&q=80",
+  desc:"Appareil d'occasion très propre (Venue). Test complet sur place. Face ID et True Tone fonctionnels.",specs:{"Écran":"6.1 pouces Super Retina XDR","Santé Batterie":"89%","État physique":"10/10 (Aucune rayure)","Garantie":"1 mois boutique"},
+  cap:[{c:"128 Go",p:650000,s:2}],col:[{n:"Titane Noir",h:"#424240"},{n:"Titane Bleu",h:"#1a2c42"}]},
+ {id:3,cat:"android",marque:"Samsung",modele:"Galaxy S23 Ultra",etat:"venue",nouveau:true,troc:true,visible:true,image:"https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&w=800&q=80",
+  desc:"Appareil d'occasion certifié. Stylet d'origine inclus et fonctionnel.",specs:{"Écran":"6.8 pouces Dynamic AMOLED 2X","Stylet":"S-Pen inclus","État physique":"9/10 (Micros rayures)"},
+  cap:[{c:"256 Go",p:450000,s:1}],col:[{n:"Noir Fantôme",h:"#212121"},{n:"Crème",h:"#e6dfd1"}]},
+ {id:4,cat:"android",marque:"Xiaomi",modele:"Redmi Note 13 Pro",etat:"neuf",nouveau:true,troc:false,visible:true,image:"https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80",
+  desc:"Idéal pour un usage intensif, charge hyper rapide.",specs:{"Écran":"6.67 pouces AMOLED 120 Hz","Appareil Photo":"200 Mpx","Charge":"67W Turbo"},
+  cap:[{c:"256 Go",p:165000,s:6}],col:[{n:"Noir Minuit",h:"#000000"}]}
+];
+
+let produits = [], SET = {...SET0}, panier = [];
+function lire(k, def){ try{ return JSON.parse(localStorage.getItem("maro_" + k)) ?? def; }catch{ return def; } }
+function ecrire(k, v){ try{ localStorage.setItem("maro_" + k, JSON.stringify(v)); }catch{} }
+async function chargerDonnees(){
+    let p = lire("p", null); if(!Array.isArray(p)) p = P0;
+    produits = p; SET = {...SET0, ...lire("s", {})}; panier = lire("c", []) || [];
+    $("stat-prods").textContent = produits.length;
+}
+
+const prod = id => produits.find(x => x.id == id);
+const stockTot = p => p.cap.reduce((s, v) => s + (+v.s || 0), 0);
+const prixMin = p => { const a = p.cap.map(v => +v.p).filter(x => x > 0); return a.length ? Math.min(...a) : 0; };
+const libelle = l => { const p = prod(l.id), v = p.cap[l.vi]; return `${p.modele} (${v.c})`; };
+
+/* ========================================== */
+/* ROUTEUR (SPA ARCHITECTURE)                 */
+/* ========================================== */
+function checkAuth() { return sessionStorage.getItem('maro_admin_token') === '1'; }
+
+function handleRouting() {
+    const hash = window.location.hash;
+    
+    // Branche ADMINISTRATION
+    if (hash === '#admin') {
+        $('layout-public').classList.add('hidden');
+        $('layout-public').classList.remove('flex');
+        $('layout-admin').classList.remove('hidden');
+        $('layout-admin').classList.add('flex');
+        
+        if (checkAuth()) {
+            $('vue-login').classList.add('hidden');
+            $('vue-dashboard').classList.remove('hidden');
+            $('vue-dashboard').classList.add('flex');
+            renderAdminDashboard();
+        } else {
+            $('vue-dashboard').classList.add('hidden');
+            $('vue-dashboard').classList.remove('flex');
+            $('vue-login').classList.remove('hidden');
+        }
+    } 
+    // Branche BOUTIQUE PUBLIQUE
+    else {
+        $('layout-admin').classList.add('hidden');
+        $('layout-admin').classList.remove('flex');
+        $('layout-public').classList.remove('hidden');
+        $('layout-public').classList.add('flex');
+        
+        // Navigation interne publique
+        const page = hash.replace('#', '') || 'accueil';
+        naviguerVers(page);
+    }
+}
+window.addEventListener('hashchange', handleRouting);
+
+/* ---------- LOGIQUE BOUTIQUE PUBLIQUE ---------- */
+let categorieActive = "tous", produitActifId = null, sel = {vi:0, ci:0}, qty = 1;
+
+function naviguerVers(page){
+    document.querySelectorAll("#layout-public .view-section").forEach(el => el.classList.remove("active"));
+    const target = $("vue-" + page) || $("vue-accueil");
+    target.classList.add("active");
+    window.scrollTo({top:0});
+    
+    document.querySelectorAll(".nav-link").forEach(el => {
+        const on = el.dataset.target === page;
+        el.classList.toggle("text-gold-500", on); el.classList.toggle("text-gray-400", !on);
+    });
+    
+    if(page === "boutique") afficherCatalogue();
+    if(page === "accueil") afficherAccueil();
+    if(page === "contact") majContact();
+}
+function filtrerEtNaviguer(cat){ categorieActive = cat; window.location.hash = '#boutique'; }
+
+function cartePure(p){
+    const pm = prixMin(p);
+    return `<div class="bg-dark-800 rounded-3xl overflow-hidden border border-white/5 hover:border-gold-500/50 transition flex flex-col cursor-pointer shadow-lg" onclick="ouvrirDetails(${p.id})">
+        <div class="bg-white p-6 h-56 flex items-center justify-center relative">
+            <img src="${esc(p.image || NOIMG)}" alt="${esc(p.modele)}" onerror="this.onerror=null;this.src=NOIMG" class="max-h-full object-contain transform hover:scale-105 transition duration-500">
+            ${stockTot(p) ? "" : '<span class="absolute top-3 right-3 text-xs font-bold px-3 py-1 rounded-full bg-red-600 text-white">Épuisé</span>'}
+        </div>
+        <div class="p-6 flex flex-col flex-grow justify-between"><div>
+            <div class="flex justify-between items-start gap-2"><h3 class="font-bold text-lg text-white leading-tight">${esc(p.modele)}</h3><span class="text-xs bg-white/10 text-gray-300 px-2 py-0.5 rounded">${esc(p.marque)}</span></div>
+            <p class="text-xs text-gray-500 mt-3">${pm ? "À partir de" : "&nbsp;"}</p>
+            <p class="text-2xl font-extrabold text-gold-500">${pm ? fcfa(pm) : "Prix sur demande"}</p></div>
+            <button class="btn b-wh mt-5 w-full">Voir le produit</button></div></div>`;
+}
+
+function afficherCatalogue(){
+    const q = $("filtre-recherche").value.toLowerCase().trim(), etat = $("filtre-etat").value, max = +$("filtre-prix").value;
+    $("filtres-pilules").innerHTML = [["tous","Tous"], ...Object.entries(CATS)].map(([k, t]) =>
+        `<button data-cat="${k}" class="px-6 py-2 rounded-full text-sm ${k === categorieActive ? "bg-white text-black font-bold" : "border border-white/10 text-white hover:border-white"}">${t}</button>`).join("");
+    const r = produits.filter(p => p.visible !== false && (categorieActive === "tous" || p.cat === categorieActive)
+        && (`${p.modele} ${p.marque}`).toLowerCase().includes(q) && (!etat || p.etat === etat) && (!max || !prixMin(p) || prixMin(p) <= max))
+        .sort((a, b) => (stockTot(a) === 0) - (stockTot(b) === 0));
+    $("compteur-produits").textContent = r.length + (r.length > 1 ? " produits" : " produit");
+    $("grille-produits").innerHTML = r.length ? r.map(cartePure).join("") : '<p class="col-span-full py-16 text-center text-gray-500">Aucun produit trouvé.</p>';
+}
+$("filtres-pilules").addEventListener("click", e => { const b = e.target.closest("[data-cat]"); if(b){ categorieActive = b.dataset.cat; afficherCatalogue(); } });
+["filtre-recherche","filtre-etat","filtre-prix"].forEach(i => $(i).addEventListener("input", afficherCatalogue));
+
+function afficherAccueil(){
+    const n = produits.filter(p => p.visible !== false && p.nouveau).slice(0, 4);
+    $("grille-nouveautes").innerHTML = n.length ? n.map(cartePure).join("") : '<p class="text-gray-500">Bientôt de nouveaux arrivages.</p>';
+}
+
+function ouvrirDetails(id){
+    const p = prod(id); if(!p) return;
+    produitActifId = id; qty = 1; sel = {vi: Math.max(0, p.cap.findIndex(v => +v.s > 0)), ci: 0};
+    $("dt-ariane-nom").textContent = p.modele; $("dt-nom").textContent = p.modele; $("dt-desc").textContent = p.desc || "";
+    $("dt-image-main").src = p.image || NOIMG;
+    
+    // Les étiquettes Neuf/Venue/Troc sont affichées ICI, au niveau des détails
+    $("dt-badges").innerHTML = `<span class="${p.etat === "neuf" ? "bg-green-600 text-white" : "bg-amber-500 text-black"} text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-md">${esc(ETAT[p.etat] || "")}</span>`
+        + (p.troc ? '<span class="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-md flex items-center gap-1"><svg class="ic"><use href="#i-rotate"/></svg> Troc accepté</span>' : "");
+    
+    const sim = p.specs && p.specs.SIM; $("dt-bloc-sim").classList.toggle("hidden", !sim); $("dt-sim").textContent = sim || "";
+    $("dt-bloc-cap").classList.toggle("hidden", p.cap.length === 1 && p.cap[0].c === "Standard");
+    $("dt-capacites").innerHTML = p.cap.map((v, i) => `<div><input type="radio" name="dt-cap" id="cap-${i}" class="cap-radio hidden" ${i === sel.vi ? "checked" : ""} onchange="choisir('vi',${i})"><label for="cap-${i}" class="cursor-pointer border border-white/20 rounded-lg px-4 py-2 text-sm font-medium text-gray-300 hover:border-gold-500 transition block ${+v.s > 0 ? "" : "opacity-50 line-through"}">${esc(v.c)}</label></div>`).join("");
+    $("dt-bloc-couleur").classList.toggle("hidden", !p.col.length);
+    $("dt-couleurs").innerHTML = p.col.map((c, i) => `<div><input type="radio" name="dt-col" id="col-${i}" class="color-radio hidden" ${i === 0 ? "checked" : ""} onchange="choisir('ci',${i})"><label for="col-${i}" title="${esc(c.n)}" class="cursor-pointer block w-8 h-8 rounded-full border border-white/10 transition" style="background-color:${esc(c.h)}"></label></div>`).join("");
+    $("dt-specs-list").innerHTML = Object.entries(p.specs || {}).map(([k, v]) => `<div class="flex border-b border-white/5 pb-4"><div class="w-1/3 text-gray-400 text-sm">${esc(k)}</div><div class="w-2/3 text-white text-sm font-medium">${esc(v)}</div></div>`).join("");
+    $("btn-dt-troc").style.display = p.troc ? "" : "none";
+    majSelection(); window.location.hash = '#details';
+}
+function choisir(k, i){ sel[k] = i; if(k === "vi") qty = 1; majSelection(); }
+function chgQty(d){ qty += d; majSelection(); }
+function majSelection(){
+    const p = prod(produitActifId), v = p.cap[sel.vi], s = +v.s || 0, c = p.col[sel.ci];
+    $("dt-prix").textContent = +v.p ? fcfa(v.p) : "Prix sur demande";
+    $("dt-stock").textContent = s ? (s <= 2 ? "Stock limité" : "Disponible") : "Épuisé";
+    $("dt-stock").className = "text-sm mb-2 " + (s ? "text-green-400" : "text-red-400");
+    $("dt-col-nom").textContent = "Couleur" + (c ? " : " + c.n : "");
+    qty = Math.min(Math.max(1, qty), Math.max(1, s)); $("dt-qty").value = qty;
+    $("btn-add-cart").disabled = !s;
+    $("btn-buy-now").innerHTML = `<svg class="ic text-lg"><use href="#i-whatsapp"/></svg> ${s ? "Commander" : "Se renseigner"}`;
+}
+$("btn-add-cart").onclick = () => {
+    const p = prod(produitActifId), s = +p.cap[sel.vi].s || 0; if(!s) return;
+    const l = panier.find(x => x.id == p.id && x.vi === sel.vi && x.ci === sel.ci);
+    if(l) l.q = Math.min(l.q + qty, s); else panier.push({id:p.id, vi:sel.vi, ci:sel.ci, q:qty});
+    nettoyerCart();
+    const b = $("btn-add-cart"); b.textContent = "Ajouté ✓"; setTimeout(() => b.textContent = "Ajouter au panier", 1500);
+};
+$("btn-buy-now").onclick = () => {
+    const p = prod(produitActifId), v = p.cap[sel.vi], l = {id:p.id, vi:sel.vi, ci:sel.ci};
+    redirigerWhatsApp(+v.s > 0
+        ? `Bonjour, je souhaite commander : ${qty} × ${libelle(l)} à ${+v.p ? fcfa(v.p) : "prix sur demande"}. Est-il disponible ?`
+        : `Bonjour, le ${libelle(l)} est affiché épuisé sur votre site. Pouvez-vous me le procurer ?`);
+};
+
+/* Panier */
+function nettoyerCart(){
+    panier = panier.filter(l => { const p = prod(l.id); return p && p.visible !== false && p.cap[l.vi] && +p.cap[l.vi].s > 0; });
+    panier.forEach(l => l.q = Math.min(Math.max(1, l.q | 0), +prod(l.id).cap[l.vi].s));
+    ecrire("c", panier); 
+    const n = panier.reduce((a, l) => a + l.q, 0); 
+    $("badge-panier").textContent = n; $("badge-panier").classList.toggle("hidden", !n);
+}
+function rendreCart(){
+    nettoyerCart();
+    $("panier-vide").classList.toggle("hidden", !!panier.length); $("panier-formulaire").classList.toggle("hidden", !panier.length);
+    $("panier-liste").innerHTML = panier.map((l, i) => { const p = prod(l.id), pr = +p.cap[l.vi].p;
+        return `<div class="flex items-center gap-3 bg-dark-900 border border-white/5 p-3 rounded-2xl">
+        <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center p-1 shrink-0"><img src="${esc(p.image)}" class="max-h-full max-w-full"></div>
+        <div class="flex-grow min-w-0"><h4 class="text-white text-sm font-bold truncate">${esc(libelle(l))}</h4><p class="text-gold-500 text-sm font-semibold">${pr ? fcfa(pr * l.q) : "Prix sur demande"}</p></div>
+        <div class="flex items-center gap-2 text-white"><button type="button" class="w-7 h-7 rounded-full bg-dark-800" onclick="chgLigne(${i},-1)">−</button><span class="text-sm font-bold w-5 text-center">${l.q}</span><button type="button" class="w-7 h-7 rounded-full bg-dark-800" onclick="chgLigne(${i},1)">+</button><button type="button" class="ml-1 text-gray-500 hover:text-red-400" onclick="supLigne(${i})"><svg class="ic"><use href="#i-trash"/></svg></button></div></div>`; }).join("");
+    let t = 0, sur = false; panier.forEach(l => { const pr = +prod(l.id).cap[l.vi].p; if(pr) t += pr * l.q; else sur = true; });
+    $("panier-total").textContent = fcfa(t) + (sur ? " + à conf." : "");
+}
+function chgLigne(i, d){ panier[i].q += d; rendreCart(); }
+function supLigne(i){ panier.splice(i, 1); rendreCart(); }
+function viderPanier(){ panier = []; rendreCart(); }
+function ouvrirCart(){ rendreCart(); $("modal-panier").showModal(); }
+function validerCommande(e){
+    e.preventDefault(); nettoyerCart(); if(!panier.length) return;
+    const note = $("c-quartier").value.trim();
+    let t = 0; const art = panier.map(l => { const pr = +prod(l.id).cap[l.vi].p; if(pr) t += pr * l.q; return `• ${l.q} × ${libelle(l)} : ${pr ? fcfa(pr * l.q) : "prix sur demande"}`; }).join("\n");
+    redirigerWhatsApp(`🛒 *NOUVELLE COMMANDE*\n\n*Client :* ${$("c-nom").value.trim()}${note ? "\n*Note :* " + note : ""}\n\n*Articles :*\n${art}\n\n*TOTAL : ${fcfa(t)}*\n\nBonjour, mes articles sont-ils disponibles ?`);
+    $("modal-panier").close();
+}
+
+/* Troc */
+function ouvrirTroc(id){
+    const o = ['<option value="">Choisissez le téléphone que vous souhaitez</option>'];
+    produits.filter(p => p.visible !== false && p.troc).forEach(p => p.cap.forEach((v, i) => { if(+v.s>0) o.push(`<option value="${p.id}:${i}">${esc(p.modele)}${v.c !== "Standard" ? " · " + esc(v.c) : ""}${+v.p ? " · " + fcfa(v.p) : ""}</option>`); }));
+    o.push('<option value="autre">Autre modèle (à préciser)</option>');
+    $("t-cible").innerHTML = o.join("");
+    const p = id ? prod(id) : null;
+    if(p && p.troc && p.cap[sel.vi] && +p.cap[sel.vi].s > 0) $("t-cible").value = `${p.id}:${id == produitActifId ? sel.vi : 0}`;
+    majTrocAutre(); $("modal-troc").showModal();
+}
+function majTrocAutre(){ const a = $("t-cible").value === "autre"; $("t-autre").classList.toggle("hidden", !a); $("t-autre").required = a; }
+function validerTroc(e){
+    e.preventDefault(); const bat = $("t-bat").value, c = $("t-cible").value; let cible;
+    if(c === "autre") cible = $("t-autre").value.trim();
+    else { const [id, vi] = c.split(":"), p = prod(id), v = p.cap[+vi]; cible = `${p.modele} (${v.c})`; }
+    redirigerWhatsApp(`🔄 *PROPOSITION DE TROC*\n\n*Je souhaite :* ${cible}\n*Je donne :* ${$("t-mod").value.trim()}\n*État :* ${$("t-etat").value}\n*Batterie :* ${bat ? bat + " %" : "non précisée"}\n*J'ajoute :* ${fcfa(num($("t-plus").value))}\n\nL'offre vous convient-elle ?`);
+    $("modal-troc").close(); $("f-troc").reset();
+}
+
+/* Utilitaires Publique */
+function redirigerWhatsApp(msg){
+    const n = String(SET.wa).replace(/\D/g, "");
+    if(n.length < 8) return alert("Le numéro WhatsApp n'est pas configuré.");
+    window.open(`https://wa.me/${n}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+}
+function fermerModal(id) { $(id).close(); }
+function majContact(){
+    $("contact-infos").innerHTML = [["Adresse", SET.adresse], ["Horaires", SET.horaires]].filter(x => x[1]).map(([k, v]) => `<div><dt class="text-gray-500 mb-1">${k}</dt><dd class="font-medium text-white">${esc(v)}</dd></div>`).join("");
+}
+
+/* ---------- LOGIQUE ADMINISTRATION ---------- */
+$("f-login").addEventListener("submit", e => {
+    e.preventDefault();
+    const mail = $("l-mail").value; const mdp = $("l-mdp").value;
+    // Simulation basique d'authentification pour le prototype
+    if(mail === "admin@maro.bf" && mdp === "admin") {
+        sessionStorage.setItem('maro_admin_token', '1');
+        handleRouting(); // Re-trigger le routage pour afficher le dashboard
+    } else {
+        alert("Identifiants incorrects. Testez avec admin@maro.bf / admin");
+    }
+});
+
+function logoutAdmin() {
+    sessionStorage.removeItem('maro_admin_token');
+    handleRouting();
+}
+
+function renderAdminDashboard() {
+    $("adm-liste").innerHTML = produits.map(p => `<div class="bg-dark-900 border border-white/5 rounded-2xl p-4 flex flex-col md:flex-row md:items-center gap-4">
+        <div class="md:w-1/3"><p class="text-white font-bold">${esc(p.modele)}</p><p class="text-xs text-gray-500">${esc(p.marque)}</p></div>
+        <div class="flex-1 space-y-2">${p.cap.map((v, i) => `<div class="flex items-center gap-3 text-sm text-gray-300"><span class="w-20 shrink-0 truncate">${esc(v.c)}</span>
+            <div class="flex gap-2 items-center"><span class="text-xs text-gray-500">Prix</span><input type="number" min="0" step="1000" value="${+v.p || 0}" data-f="p" data-id="${p.id}" data-v="${i}" class="inp py-1 w-28 text-right"></div>
+            
+        </div>`).join("")}</div>
+    </div>`).join("");
+}
+
+$("adm-liste").addEventListener("change", e => {
+    const t = e.target, d = t.dataset; if(!d.f) return; const p = prod(d.id);
+    if(d.f !== "p") return; p.cap[+d.v].p = Math.max(0, num(t.value));
+    ecrire("p", produits); // Sauvegarde automatique en localStorage
+});
+
+/* ---------- INITIALISATION ---------- */
+(async () => {
+    await chargerDonnees();
+    nettoyerCart();
+    
+    // Header Infos
+    const nomBoutique = String(SET.storeName || "MARO BRUTAF TECH");
+    $("brand-nav").innerHTML = esc(nomBoutique) + '<span class="text-gold-500">.</span>';
+    $("brand-footer").innerHTML = esc(nomBoutique) + '<span class="text-gold-500">.</span>';
+    $("topbar").classList.toggle("hidden", !SET.annonce); $("annonce").textContent = SET.annonce;
+    const url = u => /^https?:\/\//.test(u) ? u : "", wa = String(SET.wa).replace(/\D/g, "");
+    $("ft-social").innerHTML = [[url(SET.facebook), "fa-facebook"], [url(SET.instagram), "fa-instagram"], [wa.length >= 8 ? "https://wa.me/" + wa : "", "fa-whatsapp"]].filter(x => x[0]).map(([u, i]) => `<a href="${esc(u)}" target="_blank" rel="noopener" class="hover:text-white text-lg"><svg class="ic"><use href="#i-${i.slice(3)}"/></svg></a>`).join("");
+    $("ft-info").textContent = ["© 2026 Maro Brutaf Tech.", SET.adresse].filter(Boolean).join(" · ");
+    
+    // Textes A propos
+    $("ap-titre").textContent = SET.aproposTitre;
+    $("ap-texte").innerHTML = String(SET.aproposTexte).split("\n").map(t => `<p>${esc(t)}</p>`).join("");
+    
+    handleRouting(); // Lance l'aiguilleur
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Espace gérant · MARO BRUTAF TECH</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section id="login-panel" class="login-wrap">
+      <div class="brand-mark">MARO BRUTAF<span>.</span></div>
+      <div class="login-card">
+        <div class="lock-icon" aria-hidden="true">▣</div>
+        <p class="eyebrow">ESPACE PRIVÉ</p>
+        <h1>Bonjour, gérant 👋</h1>
+        <p class="muted">Connectez-vous pour gérer les téléphones de votre boutique.</p>
+        <form id="login-form">
+          <label for="login-email">Adresse e-mail</label>
+          <input id="login-email" type="email" autocomplete="username" placeholder="vous@exemple.com" required>
+          <label for="login-password">Mot de passe</label>
+          <input id="login-password" type="password" autocomplete="current-password" placeholder="Votre mot de passe" required>
+          <button class="btn btn-primary btn-full" type="submit">Se connecter <span aria-hidden="true">→</span></button>
+          <p id="login-error" class="error" role="alert" hidden>Identifiants incorrects. Vérifiez votre adresse e-mail et votre mot de passe.</p>
+        </form>
+        <a class="back-link" href="index.html">← Retour à la boutique</a>
+        <p class="prototype-note"><strong>Prototype :</strong> la connexion est simulée dans ce navigateur. Elle ne protège pas encore un vrai site en ligne.</p>
+      </div>
+    </section>
+
+    <section id="dashboard" hidden>
+      <header class="top-header">
+        <a href="index.html" class="brand-mark">MARO BRUTAF<span>.</span></a>
+        <button id="logout-button" class="btn btn-outline btn-small" type="button">Déconnexion ↗</button>
+      </header>
+      <div class="content">
+        <div class="welcome-row"><div><p class="eyebrow">VOTRE BOUTIQUE</p><h1>Tableau de bord</h1><p class="muted">Gérez les produits, les prix, les photos et les informations de la boutique.</p></div><a href="index.html" class="btn btn-primary desktop-action">Voir la boutique ↗</a></div>
+        <div class="prototype-banner"><strong>Mode prototype</strong><span>Les changements sont enregistrés dans ce navigateur uniquement. La synchronisation Supabase viendra ensuite.</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon">▣</span><p class="muted">Produits enregistrés</p><strong id="stat-products">0</strong></article>
+          <article class="stat-card"><span class="stat-icon">✓</span><p class="muted">Produits visibles</p><strong id="stat-visible">0</strong></article>
+        </div>
+        <nav class="tabs" aria-label="Administration">
+          <button class="tab active" data-tab="products" type="button">📱 Mes téléphones</button>
+          <button class="tab" data-tab="settings" type="button">⚙️ Ma boutique</button>
+        </nav>
+
+        <section id="tab-products" class="panel tab-panel">
+          <div class="panel-heading"><div><h2>Mes produits</h2><p class="muted">Ajoutez ou modifiez les téléphones, les prix, les photos et les options de troc.</p></div><button id="add-product" class="btn btn-primary" type="button">＋ Ajouter un téléphone</button></div>
+          <div id="product-list" class="product-list"></div>
+          <div id="empty-products" class="empty-state" hidden><div class="empty-emoji">📱</div><h3>Aucun produit</h3><p>Ajoutez votre premier téléphone pour commencer.</p></div>
+        </section>
+
+        <section id="tab-settings" class="panel tab-panel" hidden>
+          <div class="panel-heading"><div><h2>Informations de la boutique</h2><p class="muted">Ces informations sont utilisées sur le site public.</p></div></div>
+          <form id="settings-form" class="form-grid">
+            <label>Nom de la boutique<input name="storeName" value="MARO BRUTAF TECH" required></label>
+            <label>Numéro WhatsApp <small>Avec indicatif international, sans + ni espaces</small><input name="wa" placeholder="Ex. 22670000000" inputmode="tel" required></label>
+            <label>Adresse de la boutique<input name="adresse" placeholder="Ex. Koulouba, Ouagadougou"></label>
+            <label>Horaires d'ouverture<input name="horaires" placeholder="Ex. Lun–Sam : 08 h–20 h"></label>
+            <label class="field-full">Texte d'accueil<textarea name="aproposTitre" rows="2" placeholder="Ex. Votre expert mobile à Ouagadougou"></textarea></label>
+            <label class="field-full">Présentation de la boutique<textarea name="aproposTexte" rows="3" placeholder="Présentez votre boutique en quelques phrases."></textarea></label>
+            <label>Annonce (facultatif)<input name="annonce" placeholder="Ex. Nouvel arrivage disponible !"></label>
+            <label>Page Facebook (facultatif)<input name="facebook" type="url" placeholder="https://facebook.com/..."></label>
+            <label>Page Instagram (facultatif)<input name="instagram" type="url" placeholder="https://instagram.com/..."></label>
+            <div class="field-full"><button class="btn btn-primary" type="submit">Enregistrer les informations</button><span id="settings-feedback" class="feedback" role="status"></span></div>
+          </form>
+        </section>
+        <footer class="admin-footer">MARO BRUTAF TECH · Espace gérant · Prototype</footer>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="product-dialog" class="dialog">
+    <form id="product-form" class="dialog-card">
+      <div class="dialog-heading"><div><p class="eyebrow">CATALOGUE</p><h2 id="product-dialog-title">Ajouter un téléphone</h2></div><button id="close-dialog" class="icon-button" type="button" aria-label="Fermer">×</button></div>
+      <input type="hidden" name="id">
+      <div class="form-grid">
+        <label>Nom du modèle<input name="modele" required placeholder="Ex. Samsung Galaxy A56"></label>
+        <label>Marque<input name="marque" required placeholder="Ex. Samsung"></label>
+        <label>Catégorie<select name="cat"><option value="iphone">iPhone</option><option value="android" selected>Téléphone Android</option><option value="accessoires">Accessoire</option></select></label>
+        <label>État<select name="etat"><option value="neuf">Neuf scellé</option><option value="venue">Très propre</option><option value="occasion">Occasion</option></select></label>
+        <label class="field-full">Lien de la photo <small>Prototype actuel : utilisez une image déjà en ligne.</small><input name="image" type="url" placeholder="https://..."></label>
+        <label class="field-full">Description<textarea name="desc" rows="3" placeholder="Décrivez le téléphone."></textarea></label>
+        <div class="field-full option-row"><label class="check-label"><input name="nouveau" type="checkbox"> Afficher dans les nouveautés</label><label class="check-label"><input name="troc" type="checkbox"> Accepter les propositions de troc</label><label class="check-label"><input name="visible" type="checkbox" checked> Afficher dans la boutique</label></div>
+        <div class="field-full subsection"><div class="subsection-head"><div><h3>Capacités et prix</h3><p class="muted">Ajoutez une ligne par capacité et son prix.</p></div><button id="add-variant" type="button" class="btn btn-outline btn-small">＋ Capacité</button></div><div id="variants-list"></div></div>
+        <div class="field-full subsection"><div class="subsection-head"><div><h3>Couleurs</h3><p class="muted">Nom et couleur d'affichage.</p></div><button id="add-color" type="button" class="btn btn-outline btn-small">＋ Couleur</button></div><div id="colors-list"></div></div>
+      </div>
+      <div class="dialog-actions"><button id="cancel-product" class="btn btn-outline" type="button">Annuler</button><button class="btn btn-primary" type="submit">Enregistrer le produit</button></div>
+      <p class="small-note">Les photos seront téléversées dans Supabase Storage lors de la phase backend. Pour le moment, un lien d'image est utilisé.</p>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/admin.js"></script>
+</body>
+</html>
