@@ -39,7 +39,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
 <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3 3.5 6.5 6.5 6.5l.9-1.9-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2.1z"/></symbol>
 <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
-<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
 <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
 <symbol id="i-map" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
 <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
@@ -47,11 +47,8 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a5 5 0 0 1-5-5h-3v11a1 1 0 1 1-1-1v-3z"/></symbol>
 </defs></svg>
 
-<!-- ========================================== -->
-<!-- BRANCHE 1 : BOUTIQUE PUBLIQUE              -->
-<!-- ========================================== -->
+<!-- BOUTIQUE PUBLIQUE -->
 <div id="layout-public" class="flex flex-col min-h-screen w-full">
-    
     <div id="topbar" class="hidden bg-black border-b border-white/5 py-2 px-4 text-center"><p id="annonce" class="text-gold-500 text-xs font-medium tracking-wider uppercase"></p></div>
 
     <nav class="glass-nav sticky top-0 z-50 border-b border-white/10">
@@ -108,34 +105,16 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                 </div>
             </div>
 
-            <!-- NOUVELLE SECTION : COMMENT COMMANDER -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
                 <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider mb-10"><span class="border-b-2 border-gold-500 pb-2">Comment commander</span></h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-8 mt-6">
-                    <div class="relative">
-                        <span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">1</span>
-                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Choisissez</h3>
-                        <p class="text-gray-400 text-sm relative z-10">Parcourez les produits, puis sélectionnez la capacité et la couleur de votre téléphone.</p>
-                    </div>
-                    <div class="relative">
-                        <span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">2</span>
-                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Ajoutez au panier</h3>
-                        <p class="text-gray-400 text-sm relative z-10">Vérifiez votre sélection et le total de votre commande.</p>
-                    </div>
-                    <div class="relative">
-                        <span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">3</span>
-                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Renseignez vos infos</h3>
-                        <p class="text-gray-400 text-sm relative z-10">Nom, téléphone, quartier, livraison ou retrait en boutique.</p>
-                    </div>
-                    <div class="relative">
-                        <span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">4</span>
-                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Envoyez la commande</h3>
-                        <p class="text-gray-400 text-sm relative z-10">Elle s'ouvre dans WhatsApp, déjà rédigée. La boutique vous répond pour finaliser.</p>
-                    </div>
+                    <div class="relative"><span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">1</span><h3 class="text-xl font-bold text-white mb-2 relative z-10">Choisissez</h3><p class="text-gray-400 text-sm relative z-10">Parcourez les produits, puis sélectionnez la capacité et la couleur de votre téléphone.</p></div>
+                    <div class="relative"><span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">2</span><h3 class="text-xl font-bold text-white mb-2 relative z-10">Ajoutez au panier</h3><p class="text-gray-400 text-sm relative z-10">Vérifiez votre sélection et le total de votre commande.</p></div>
+                    <div class="relative"><span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">3</span><h3 class="text-xl font-bold text-white mb-2 relative z-10">Renseignez vos infos</h3><p class="text-gray-400 text-sm relative z-10">Nom, téléphone, quartier, livraison ou retrait en boutique.</p></div>
+                    <div class="relative"><span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">4</span><h3 class="text-xl font-bold text-white mb-2 relative z-10">Envoyez la commande</h3><p class="text-gray-400 text-sm relative z-10">Elle s'ouvre dans WhatsApp, déjà rédigée. La boutique vous répond pour finaliser.</p></div>
                 </div>
             </div>
 
-            <!-- NOUVELLE SECTION : RETROUVEZ-NOUS -->
             <div class="bg-dark-800/30 border-y border-white/5">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
                     <div>
@@ -146,14 +125,10 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                 </div>
             </div>
 
-            <!-- NOUVELLE SECTION : ASSISTANCE -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="bg-gradient-to-r from-dark-800 to-black border border-white/10 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div>
-                        <h2 class="text-2xl md:text-3xl font-extrabold text-white uppercase tracking-wider mb-2">Une question avant de commander ?</h2>
-                        <p class="text-gray-400">Un conseiller vous répond et confirme la disponibilité du produit.</p>
-                    </div>
-                    <button onclick="redirigerWhatsApp('Bonjour, j\'ai une question avant de commander.')" class="btn b-out whitespace-nowrap"><svg class="ic"><use href="#i-whatsapp"/></svg> Nous écrire</button>
+                    <div><h2 class="text-2xl md:text-3xl font-extrabold text-white uppercase tracking-wider mb-2">Une question avant de commander ?</h2><p class="text-gray-400">Un conseiller vous répond et confirme la disponibilité du produit.</p></div>
+                    <button onclick="redirigerWhatsApp('Bonjour, je vous contacte avant de commander.')" class="btn b-out whitespace-nowrap"><svg class="ic"><use href="#i-whatsapp"/></svg> Nous écrire</button>
                 </div>
             </div>
         </section>
@@ -187,9 +162,8 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                     <div class="bg-dark-800 border border-white/5 rounded-3xl p-8">
                         <h2 class="text-2xl font-bold text-white mb-6 uppercase">Discuter avec le gérant</h2>
                         <p class="text-gray-400 mb-8 leading-relaxed">Vous cherchez un modèle précis, vous avez une question sur un troc, ou vous souhaitez valider une commande ? Notre équipe vous répond immédiatement sur WhatsApp.</p>
-                        <button onclick="redirigerWhatsApp('Bonjour, j\'ai une question concernant vos téléphones.')" class="btn b-gold w-full py-4 text-lg"><svg class="ic text-2xl"><use href="#i-whatsapp"/></svg> Ouvrir WhatsApp</button>
+                        <button onclick="redirigerWhatsApp('Bonjour, je vous contacte concernant vos téléphones.')" class="btn b-gold w-full py-4 text-lg"><svg class="ic text-2xl"><use href="#i-whatsapp"/></svg> Ouvrir WhatsApp</button>
                     </div>
-                    <!-- MAJ CONTACT: Intégration Carte + Coordonnées -->
                     <div class="bg-dark-800 border border-white/5 rounded-3xl p-8 flex flex-col">
                         <h2 class="text-2xl font-bold text-white mb-6 uppercase">Informations utiles</h2>
                         <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300 mb-8">
@@ -213,7 +187,6 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 id="ap-titre" class="text-3xl font-extrabold text-white mb-6"></h2>
                 <div id="ap-texte" class="text-gray-400 leading-relaxed space-y-4 max-w-3xl"></div>
-                <div id="ap-points" class="grid sm:grid-cols-3 gap-8 mt-14"></div>
             </div>
         </section>
 
@@ -263,7 +236,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
         </section>
     </main>
 
-    <!-- NOUVEAU FOOTER RESTRUCTURÉ -->
+    <!-- FOOTER -->
     <footer class="bg-black border-t border-white/5 pt-16 pb-8 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
@@ -293,8 +266,8 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-gray-500 text-xs text-center md:text-left">© 2026 Maro Brutaf Tech. Tous droits réservés.</p>
                 <div class="flex gap-4 items-center">
-                    <a href="https://facebook.com" target="_blank" class="text-gray-400 hover:text-white transition"><svg class="ic text-xl"><use href="#i-facebook"/></svg></a>
-                    <a href="https://tiktok.com" target="_blank" class="text-gray-400 hover:text-white transition"><svg class="ic text-xl"><use href="#i-tiktok"/></svg></a>
+                    <a href="https://www.facebook.com/share/1CKbAk3RcM/?mibextid=wwXIfr" target="_blank" class="text-gray-400 hover:text-white transition"><svg class="ic text-xl"><use href="#i-facebook"/></svg></a>
+                    <a href="https://www.tiktok.com/@marobrutaf?_r=1&amp;_t=ZS-9AvhhmuSX6k" target="_blank" class="text-gray-400 hover:text-white transition"><svg class="ic text-xl"><use href="#i-tiktok"/></svg></a>
                 </div>
                 <div class="flex flex-col items-center md:items-end gap-1 mt-4 md:mt-0">
                     <p class="text-gray-600 text-xs font-medium">Site développé par Ali Salia.</p>
@@ -309,15 +282,12 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 <!-- BRANCHE 2 : ADMINISTRATION (PROTEGÉE)      -->
 <!-- ========================================== -->
 <div id="layout-admin" class="hidden flex-col min-h-screen w-full bg-dark-900">
-    
-    <!-- LOGIN ECRAN -->
     <section id="vue-login" class="flex-grow flex items-center justify-center px-4">
         <div class="panel p-8 w-full max-w-md shadow-2xl border-white/10 border">
             <div class="text-center mb-8">
                 <svg class="ic text-4xl text-gold-500 mb-4 mx-auto"><use href="#i-lock"/></svg>
                 <h1 class="text-2xl font-extrabold text-white mb-1">Accès Restreint</h1>
                 <p class="text-sm text-gray-400">Vérification du compte Gérant</p>
-                <p class="text-xs text-gold-500 mt-2">Test: admin@maro.bf / admin</p>
             </div>
             <form id="f-login" class="space-y-4">
                 <div><label class="lbl" for="l-mail">Email</label><input id="l-mail" type="email" required class="inp" autocomplete="username"></div>
@@ -328,31 +298,19 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
         </div>
     </section>
 
-    <!-- DASHBOARD GÉRANT -->
     <section id="vue-dashboard" class="hidden flex-grow flex-col">
         <nav class="bg-black border-b border-white/5 py-4 px-6 flex justify-between items-center sticky top-0 z-40">
             <div class="text-xl font-bold text-white flex items-center gap-2"><svg class="ic text-gold-500"><use href="#i-settings"/></svg> Tableau de bord Admin</div>
             <div class="flex items-center gap-4">
-                <a href="#" class="text-sm text-gray-400 hover:text-white flex items-center gap-1"><svg class="ic"><use href="#i-rotate"/></svg> Voir la boutique</a>
                 <button onclick="logoutAdmin()" class="btn border border-white/10 hover:bg-white/5 text-white py-2 px-4 rounded-lg text-sm font-medium"><svg class="ic"><use href="#i-logout"/></svg> Déconnexion</button>
             </div>
         </nav>
         <div class="max-w-6xl mx-auto px-4 py-8 w-full">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-dark-800 p-6 rounded-2xl border border-white/5">
-                    <h3 class="text-gray-400 text-sm font-medium mb-1">Produits en base</h3>
-                    <p class="text-3xl font-bold text-white" id="stat-prods">0</p>
-                </div>
-            </div>
-            
             <div class="bg-dark-800 rounded-3xl border border-white/5 overflow-hidden">
                 <div class="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-dark-900/50">
-                    <h2 class="text-lg font-bold text-white">Gestion des prix</h2>
-                    <span class="text-xs text-gray-500">Les modifications sont appliquées instantanément.</span>
+                    <h2 class="text-lg font-bold text-white">Gestion des prix rapides</h2>
                 </div>
-                <div class="p-6">
-                    <div id="adm-liste" class="space-y-4"></div>
-                </div>
+                <div class="p-6"><div id="adm-liste" class="space-y-4"></div></div>
             </div>
         </div>
     </section>
@@ -362,7 +320,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 <!-- MODALES COMMUNES                           -->
 <!-- ========================================== -->
 <dialog id="modal-panier" class="bg-transparent m-auto p-4 w-full max-w-lg"><div class="panel">
-    <div class="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-dark-900"><h3 class="text-xl font-bold text-white"><svg class="ic text-gold-500"><use href="#i-cart"/></svg> Votre panier</h3><button onclick="fermerModal('modal-panier')" class="text-gray-400 hover:text-white" aria-label="Fermer"><svg class="ic text-xl"><use href="#i-close"/></svg></button></div>
+    <div class="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-dark-900"><h3 class="text-xl font-bold text-white"><svg class="ic text-gold-500"><use href="#i-cart"/></svg> Votre panier</h3><button onclick="fermerModal('modal-panier')" class="text-gray-400 hover:text-white"><svg class="ic text-xl"><use href="#i-close"/></svg></button></div>
     <div class="p-6">
         <div id="panier-liste" class="space-y-3 max-h-[40vh] overflow-y-auto mb-4"></div>
         <p id="panier-vide" class="text-center py-8 text-gray-400">Votre panier est vide.</p>
@@ -379,11 +337,11 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 </div></dialog>
 
 <dialog id="modal-troc" class="bg-transparent m-auto p-4 w-full max-w-lg"><div class="panel">
-    <div class="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-dark-900"><h3 class="text-xl font-bold text-white"><svg class="ic text-gold-500"><use href="#i-rotate"/></svg> Proposer un troc</h3><button onclick="fermerModal('modal-troc')" class="text-gray-400 hover:text-white" aria-label="Fermer"><svg class="ic text-xl"><use href="#i-close"/></svg></button></div>
+    <div class="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-dark-900"><h3 class="text-xl font-bold text-white"><svg class="ic text-gold-500"><use href="#i-rotate"/></svg> Proposer un troc</h3><button onclick="fermerModal('modal-troc')" class="text-gray-400 hover:text-white"><svg class="ic text-xl"><use href="#i-close"/></svg></button></div>
     <div class="p-6">
         <p class="text-sm text-gray-400 mb-2">Indiquez le téléphone souhaité, puis décrivez le vôtre.</p>
         <form id="f-troc" onsubmit="validerTroc(event)">
-            <label class="lbl" for="t-cible">Téléphone que vous souhaitez</label><select id="t-cible" required class="inp" onchange="majTrocAutre()"></select><input id="t-autre" class="inp mt-2 hidden" placeholder="Précisez le modèle souhaité" aria-label="Modèle souhaité">
+            <label class="lbl" for="t-cible">Téléphone que vous souhaitez</label><select id="t-cible" required class="inp" onchange="majTrocAutre()"></select><input id="t-autre" class="inp mt-2 hidden" placeholder="Précisez le modèle souhaité">
             <label class="lbl" for="t-mod">Téléphone que vous donnez</label><input id="t-mod" required placeholder="iPhone 11, 128 Go" class="inp">
             <div class="grid grid-cols-2 gap-4">
                 <div><label class="lbl" for="t-etat">État</label><select id="t-etat" class="inp"><option>Très propre</option><option>Rayures d'usage</option><option>Fissuré ou défaut</option></select></div>
@@ -394,11 +352,12 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
         </form>
     </div>
 </div></dialog>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/donnees.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fcfa = n => Number(n).toLocaleString("fr-FR") + " FCFA";
 const num = x => parseInt(String(x ?? "").replace(/\D/g, ""), 10) || 0;
 const NOIMG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 230"><rect x="10" y="4" width="100" height="222" rx="22" fill="#c9c9ce"/><circle cx="60" cy="30" r="9" fill="#888"/></svg>');
@@ -417,7 +376,10 @@ async function chargerDonnees(){
     if (!errP && dbProducts) {
         produits = dbProducts.map(dbP => ({
             id: dbP.id, cat: dbP.category, marque: dbP.brand, modele: dbP.model, etat: dbP.condition_label,
-            desc: dbP.description, image: dbP.image_url, specs: dbP.specs, cap: dbP.capacities, col: dbP.colors,
+            desc: dbP.description, image: dbP.image_url, 
+            specs: typeof dbP.specs === 'object' && dbP.specs !== null ? dbP.specs : {}, 
+            cap: Array.isArray(dbP.capacities) ? dbP.capacities : [], 
+            col: Array.isArray(dbP.colors) ? dbP.colors : [],
             nouveau: dbP.is_new, troc: dbP.trade_in, visible: dbP.is_visible
         }));
     } else {
@@ -434,13 +396,12 @@ async function chargerDonnees(){
     } else {
         SET = {...SET0};
     }
-    if($("stat-prods")) $("stat-prods").textContent = produits.length;
 }
 
 const prod = id => produits.find(x => x.id == id);
 const stockTot = p => p.cap.reduce((s, v) => s + (+v.s || 0), 0);
 const prixMin = p => { const a = p.cap.map(v => +v.p).filter(x => x > 0); return a.length ? Math.min(...a) : 0; };
-const libelle = l => { const p = prod(l.id), v = p.cap[l.vi]; return `${p.modele} (${v.c})`; };
+const libelle = l => { const p = prod(l.id), v = p.cap[l.vi]; return `${p.modele} (${v ? v.c : ''})`; };
 
 function checkAuth() { return sessionStorage.getItem('maro_admin_token') === '1'; }
 
@@ -491,7 +452,7 @@ function cartePure(p){
         </div>
         <div class="p-6 flex flex-col flex-grow justify-between"><div>
             <div class="flex justify-between items-start gap-2"><h3 class="font-bold text-lg text-white leading-tight">${esc(p.modele)}</h3><span class="text-xs bg-white/10 text-gray-300 px-2 py-0.5 rounded">${esc(p.marque)}</span></div>
-            <p class="text-xs text-gray-500 mt-3">${pm ? "À partir de" : " "}</p>
+            <p class="text-xs text-gray-500 mt-3">${pm ? "À partir de" : "&nbsp;"}</p>
             <p class="text-2xl font-extrabold text-gold-500">${pm ? fcfa(pm) : "Prix sur demande"}</p></div>
             <button class="btn b-wh mt-5 w-full">Voir le produit</button></div></div>`;
 }
@@ -533,7 +494,7 @@ function ouvrirDetails(id){
 function choisir(k, i){ sel[k] = i; if(k === "vi") qty = 1; majSelection(); }
 function chgQty(d){ qty += d; majSelection(); }
 function majSelection(){
-    const p = prod(produitActifId), v = p.cap[sel.vi], s = +v.s || 0, c = p.col[sel.ci];
+    const p = prod(produitActifId), v = p.cap[sel.vi] || {}, s = +v.s || 0, c = p.col[sel.ci];
     $("dt-prix").textContent = +v.p ? fcfa(v.p) : "Prix sur demande";
     $("dt-stock").textContent = s ? (s <= 2 ? "Stock limité" : "Disponible") : "Épuisé";
     $("dt-stock").className = "text-sm mb-2 " + (s ? "text-green-400" : "text-red-400");
@@ -562,7 +523,8 @@ function nettoyerCart(){
     panier.forEach(l => l.q = Math.min(Math.max(1, l.q | 0), +prod(l.id).cap[l.vi].s));
     ecrire("c", panier); 
     const n = panier.reduce((a, l) => a + l.q, 0); 
-    $("badge-panier").textContent = n; $("badge-panier").classList.toggle("hidden", !n);
+    const badge = $("badge-panier");
+    if(badge) { badge.textContent = n; badge.classList.toggle("hidden", !n); }
 }
 function rendreCart(){
     nettoyerCart();
@@ -590,7 +552,6 @@ function validerCommande(e){
 /* Troc */
 function ouvrirTroc(id){
     const o = ['<option value="">Choisissez le téléphone que vous souhaitez</option>'];
-    // LIGNE CORRIGÉE ICI : On affiche désormais tous les articles visibles, sans filtrer par p.troc
     produits.filter(p => p.visible !== false).forEach(p => p.cap.forEach((v, i) => { if(+v.s>0) o.push(`<option value="${p.id}:${i}">${esc(p.modele)}${v.c !== "Standard" ? " · " + esc(v.c) : ""}${+v.p ? " · " + fcfa(v.p) : ""}</option>`); }));
     o.push('<option value="autre">Autre modèle (à préciser)</option>');
     $("t-cible").innerHTML = o.join("");
@@ -614,7 +575,7 @@ function redirigerWhatsApp(msg){
     window.open(`https://wa.me/${n}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
 }
 function fermerModal(id) { $(id).close(); }
-function majContact() { /* La mise à jour est désormais figée en HTML */ }
+function majContact() {}
 
 /* ---------- LOGIQUE ADMINISTRATION ---------- */
 $("f-login").addEventListener("submit", e => {
@@ -648,18 +609,19 @@ $("adm-liste").addEventListener("change", e => {
     ecrire("p", produits);
 });
 
-/* ---------- INITIALISATION ---------- */
+/* ---------- INITIALISATION FIABILISÉE ---------- */
 (async () => {
     await chargerDonnees();
     nettoyerCart();
     
     const nomBoutique = String(SET.storeName || "MARO BRUTAF TECH");
-    $("brand-nav").innerHTML = esc(nomBoutique) + '<span class="text-gold-500">.</span>';
-    $("brand-footer").innerHTML = esc(nomBoutique) + '<span class="text-gold-500">.</span>';
-    $("topbar").classList.toggle("hidden", !SET.annonce); $("annonce").textContent = SET.annonce;
+    if($("brand-nav")) $("brand-nav").innerHTML = esc(nomBoutique) + '<span class="text-gold-500">.</span>';
+    if($("brand-footer")) $("brand-footer").innerHTML = esc(nomBoutique) + '<span class="text-gold-500">.</span>';
+    if($("topbar")) $("topbar").classList.toggle("hidden", !SET.annonce); 
+    if($("annonce")) $("annonce").textContent = SET.annonce;
     
-    $("ap-titre").textContent = SET.aproposTitre;
-    $("ap-texte").innerHTML = String(SET.aproposTexte).split("\n").map(t => `<p>${esc(t)}</p>`).join("");
+    if($("ap-titre")) $("ap-titre").textContent = SET.aproposTitre;
+    if($("ap-texte")) $("ap-texte").innerHTML = String(SET.aproposTexte).split("\n").map(t => `<p>${esc(t)}</p>`).join("");
     
     handleRouting();
 })();
