@@ -25,7 +25,6 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 .panel{background:#121212;border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;overflow:hidden}
 .lbl{display:block;font-size:.75rem;font-weight:600;color:#9ca3af;text-transform:uppercase;margin:.9rem 0 .25rem}
 .ic{width:1em;height:1em;display:inline-block;vertical-align:-.125em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-/* Hero Image Glow */
 .hero-glow::before { content:''; position:absolute; inset:-20px; background:radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%); z-index:-1; border-radius:50%; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -42,6 +41,10 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
 <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
 <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+<symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5v3a5 5 0 0 1-5-5h-3v11a1 1 0 1 1-1-1v-3z"/></symbol>
 </defs></svg>
 
 <!-- ========================================== -->
@@ -90,19 +93,69 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                         </div>
                     </div>
                     <div class="md:w-1/2 relative flex justify-center hero-glow">
-                        <!-- IMAGE images.jpg REQUISE ICI -->
                         <img src="images.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=100'" alt="Smartphone" class="relative z-10 w-full max-w-[320px] lg:max-w-[400px] object-contain drop-shadow-2xl transform hover:scale-105 transition duration-700">
                     </div>
                 </div>
             </div>
             
-            <div class="bg-dark-800/30"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <div class="flex justify-between items-end mb-8">
-                    <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider border-b-2 border-gold-500 pb-2 inline-block">Nouveautés</h2>
-                    <button onclick="filtrerEtNaviguer('tous')" class="text-gold-500 hover:text-white text-sm font-semibold">Toute la boutique <svg class="ic ml-1"><use href="#i-arrow-right"/></svg></button>
+            <div class="bg-dark-800/30">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div class="flex justify-between items-end mb-8">
+                        <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider border-b-2 border-gold-500 pb-2 inline-block">Nouveautés</h2>
+                        <button onclick="filtrerEtNaviguer('tous')" class="text-gold-500 hover:text-white text-sm font-semibold">Toute la boutique <svg class="ic ml-1"><use href="#i-arrow-right"/></svg></button>
+                    </div>
+                    <div id="grille-nouveautes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
                 </div>
-                <div id="grille-nouveautes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-            </div></div>
+            </div>
+
+            <!-- NOUVELLE SECTION : COMMENT COMMANDER -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
+                <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider mb-10"><span class="border-b-2 border-gold-500 pb-2">Comment commander</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-8 mt-6">
+                    <div class="relative">
+                        <span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">1</span>
+                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Choisissez</h3>
+                        <p class="text-gray-400 text-sm relative z-10">Parcourez les produits, puis sélectionnez la capacité et la couleur de votre téléphone.</p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">2</span>
+                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Ajoutez au panier</h3>
+                        <p class="text-gray-400 text-sm relative z-10">Vérifiez votre sélection et le total de votre commande.</p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">3</span>
+                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Renseignez vos infos</h3>
+                        <p class="text-gray-400 text-sm relative z-10">Nom, téléphone, quartier, livraison ou retrait en boutique.</p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -top-10 -left-2 text-7xl font-black text-gold-500/10">4</span>
+                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Envoyez la commande</h3>
+                        <p class="text-gray-400 text-sm relative z-10">Elle s'ouvre dans WhatsApp, déjà rédigée. La boutique vous répond pour finaliser.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOUVELLE SECTION : RETROUVEZ-NOUS -->
+            <div class="bg-dark-800/30 border-y border-white/5">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider mb-2">Retrouvez-nous</h2>
+                        <p class="text-gray-400">Avenue de la nation, boutique 32 Devant la maison du peuple, Ouagadougou.<br>Le retrait en boutique est possible. Confirmez d'abord votre commande avec un conseiller.</p>
+                    </div>
+                    <a href="https://maps.app.goo.gl/brZ211bLFXcdWSqx5?g_st=iw" target="_blank" rel="noopener" class="btn b-gold whitespace-nowrap"><svg class="ic"><use href="#i-map"/></svg> Voir l'itinéraire</a>
+                </div>
+            </div>
+
+            <!-- NOUVELLE SECTION : ASSISTANCE -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="bg-gradient-to-r from-dark-800 to-black border border-white/10 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-white uppercase tracking-wider mb-2">Une question avant de commander ?</h2>
+                        <p class="text-gray-400">Un conseiller vous répond et confirme la disponibilité du produit.</p>
+                    </div>
+                    <button onclick="redirigerWhatsApp('Bonjour, j\'ai une question avant de commander.')" class="btn b-out whitespace-nowrap"><svg class="ic"><use href="#i-whatsapp"/></svg> Nous écrire</button>
+                </div>
+            </div>
         </section>
 
         <!-- VUE : BOUTIQUE -->
@@ -136,9 +189,19 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                         <p class="text-gray-400 mb-8 leading-relaxed">Vous cherchez un modèle précis, vous avez une question sur un troc, ou vous souhaitez valider une commande ? Notre équipe vous répond immédiatement sur WhatsApp.</p>
                         <button onclick="redirigerWhatsApp('Bonjour, j\'ai une question concernant vos téléphones.')" class="btn b-gold w-full py-4 text-lg"><svg class="ic text-2xl"><use href="#i-whatsapp"/></svg> Ouvrir WhatsApp</button>
                     </div>
-                    <div class="bg-dark-800 border border-white/5 rounded-3xl p-8">
+                    <!-- MAJ CONTACT: Intégration Carte + Coordonnées -->
+                    <div class="bg-dark-800 border border-white/5 rounded-3xl p-8 flex flex-col">
                         <h2 class="text-2xl font-bold text-white mb-6 uppercase">Informations utiles</h2>
-                        <dl id="contact-infos" class="space-y-4 text-sm text-gray-300"></dl>
+                        <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300 mb-8">
+                            <div><dt class="text-gray-500 mb-1">Adresse</dt><dd class="font-medium text-white">Avenue de la nation, boutique 32<br>Devant la maison du peuple, Ouagadougou</dd></div>
+                            <div>
+                                <dt class="text-gray-500 mb-1">Téléphone / WhatsApp</dt><dd class="font-medium text-white mb-3">+226 62 21 21 22</dd>
+                                <dt class="text-gray-500 mb-1">Horaires</dt><dd class="font-medium text-white">Lun-Sam : 08h-20h</dd>
+                            </div>
+                        </dl>
+                        <div class="flex-grow rounded-2xl overflow-hidden border border-white/5 min-h-[250px] relative">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3897.2885994246837!2d-1.5332464240755913!3d12.363627087895315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e95a947c92b23%3A0x6b772c3a5fc7bf22!2sMaison%20du%20Peuple!5e0!3m2!1sfr!2sbf!4v1700000000000!5m2!1sfr!2sbf" width="100%" height="100%" style="border:0; position:absolute; top:0; left:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -162,7 +225,6 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col lg:flex-row gap-12 mb-16">
                     <div class="lg:w-1/2"><div class="bg-white rounded-3xl p-8 flex justify-center items-center h-[420px] lg:h-[500px] shadow-2xl relative">
-                        <!-- Etiquettes détails superposées sur l'image pour la clarté -->
                         <div id="dt-badges" class="absolute top-6 left-6 flex flex-col items-start gap-2"></div>
                         <img id="dt-image-main" src="" alt="" class="max-h-full max-w-full object-contain">
                     </div></div>
@@ -201,13 +263,43 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
         </section>
     </main>
 
-    <footer class="bg-black border-t border-white/5 py-10 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div id="brand-footer" class="text-2xl font-extrabold tracking-tighter text-white">MARO BRUTAF<span class="text-gold-500">.</span></div>
-            <p class="text-gray-500 text-sm text-center" id="ft-info"></p>
-            <div class="flex gap-4 items-center">
-                <span id="ft-social" class="flex gap-4 text-gray-500"></span>
-                <a href="admin.html" title="Espace gérant" aria-label="Espace gérant" class="text-gray-700 hover:text-gray-400 ml-4 text-xs flex items-center gap-2"><svg class="ic"><use href="#i-lock"/></svg><span class="hidden sm:inline">Espace gérant</span></a>
+    <!-- NOUVEAU FOOTER RESTRUCTURÉ -->
+    <footer class="bg-black border-t border-white/5 pt-16 pb-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div id="brand-footer" class="text-2xl font-extrabold tracking-tighter text-white mb-4">MARO BRUTAF<span class="text-gold-500">.</span></div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Vente de smartphones et accessoires.<br>Retrait en boutique ou livraison.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold uppercase tracking-wider text-sm mb-4">Informations</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><button onclick="naviguerVers('accueil')" class="hover:text-gold-500 transition">Accueil</button></li>
+                        <li><button onclick="naviguerVers('boutique')" class="hover:text-gold-500 transition">Boutique</button></li>
+                        <li><button onclick="naviguerVers('apropos')" class="hover:text-gold-500 transition">À propos</button></li>
+                        <li><button onclick="naviguerVers('contact')" class="hover:text-gold-500 transition">Contact</button></li>
+                        <li><button onclick="ouvrirTroc(null)" class="hover:text-gold-500 transition">Proposer un troc</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold uppercase tracking-wider text-sm mb-4">Nous joindre</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-start gap-3"><svg class="ic mt-0.5 text-gold-500"><use href="#i-whatsapp"/></svg> +226 62 21 21 22</li>
+                        <li class="flex items-start gap-3"><svg class="ic mt-0.5 text-gold-500"><use href="#i-map"/></svg> <span>Avenue de la nation, boutique 32<br>Devant la maison du peuple, Ouagadougou<br><a href="https://maps.app.goo.gl/brZ211bLFXcdWSqx5?g_st=iw" target="_blank" class="text-gold-500 hover:underline mt-1 inline-block">Voir l'itinéraire</a></span></li>
+                        <li class="flex items-start gap-3"><svg class="ic mt-0.5 text-gold-500"><use href="#i-clock"/></svg> Lun-Sam : 08h-20h</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-xs text-center md:text-left">© 2026 Maro Brutaf Tech. Tous droits réservés.</p>
+                <div class="flex gap-4 items-center">
+                    <a href="https://facebook.com" target="_blank" class="text-gray-400 hover:text-white transition"><svg class="ic text-xl"><use href="#i-facebook"/></svg></a>
+                    <a href="https://tiktok.com" target="_blank" class="text-gray-400 hover:text-white transition"><svg class="ic text-xl"><use href="#i-tiktok"/></svg></a>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-1 mt-4 md:mt-0">
+                    <p class="text-gray-600 text-xs font-medium">Site développé par Ali Salia.</p>
+                    <a href="admin.html" title="Espace gérant" aria-label="Espace gérant" class="text-gray-700 hover:text-gray-400 text-xs flex items-center gap-1 justify-center"><svg class="ic"><use href="#i-lock"/></svg> Espace gérant</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -306,87 +398,42 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 <script src="js/donnees.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));
 const fcfa = n => Number(n).toLocaleString("fr-FR") + " FCFA";
 const num = x => parseInt(String(x ?? "").replace(/\D/g, ""), 10) || 0;
 const NOIMG = "data:image/svg+xml;utf8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 230"><rect x="10" y="4" width="100" height="222" rx="22" fill="#c9c9ce"/><circle cx="60" cy="30" r="9" fill="#888"/></svg>');
 const ETAT = {neuf:"Neuf scellé", venue:"Venue (très propre)", occasion:"Occasion"};
 const CATS = {iphone:"iPhone", android:"Téléphones Android", accessoires:"Accessoires"};
 
-/* DATABASE MOCKUP */
-const SET0 = {storeName:"MARO BRUTAF TECH", wa:"2130670462357", adresse:"Koulouba, Ouagadougou", horaires:"Lun-Sam : 08h-20h", aproposTitre:"Votre expert mobile", aproposTexte:"Vente et Troc sécurisés."};
-const P0 = [
- {id:1,cat:"iphone",marque:"Apple",modele:"iPhone 16 Pro Max",etat:"neuf",nouveau:true,troc:true,visible:true,image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
-  desc:"Téléphone authentique, scellé dans sa boîte. Vendu avec garantie boutique.",specs:{"Écran":"6.7 pouces OLED 120 Hz","SIM":"Nano SIM + eSIM","RAM":"8 Go","Garantie":"12 mois boutique"},
-  cap:[{c:"256 Go",p:925000,s:1},{c:"512 Go",p:1050000,s:1}],col:[{n:"Titane Noir",h:"#333333"},{n:"Titane Blanc",h:"#e3e3e3"}]},
- {id:2,cat:"iphone",marque:"Apple",modele:"iPhone 15 Pro",etat:"venue",nouveau:true,troc:true,visible:true,image:"https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&w=800&q=80",
-  desc:"Appareil d'occasion très propre (Venue). Test complet sur place. Face ID et True Tone fonctionnels.",specs:{"Écran":"6.1 pouces Super Retina XDR","Santé Batterie":"89%","État physique":"10/10 (Aucune rayure)","Garantie":"1 mois boutique"},
-  cap:[{c:"128 Go",p:650000,s:2}],col:[{n:"Titane Noir",h:"#424240"},{n:"Titane Bleu",h:"#1a2c42"}]},
- {id:3,cat:"android",marque:"Samsung",modele:"Galaxy S23 Ultra",etat:"venue",nouveau:true,troc:true,visible:true,image:"https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&w=800&q=80",
-  desc:"Appareil d'occasion certifié. Stylet d'origine inclus et fonctionnel.",specs:{"Écran":"6.8 pouces Dynamic AMOLED 2X","Stylet":"S-Pen inclus","État physique":"9/10 (Micros rayures)"},
-  cap:[{c:"256 Go",p:450000,s:1}],col:[{n:"Noir Fantôme",h:"#212121"},{n:"Crème",h:"#e6dfd1"}]},
- {id:4,cat:"android",marque:"Xiaomi",modele:"Redmi Note 13 Pro",etat:"neuf",nouveau:true,troc:false,visible:true,image:"https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80",
-  desc:"Idéal pour un usage intensif, charge hyper rapide.",specs:{"Écran":"6.67 pouces AMOLED 120 Hz","Appareil Photo":"200 Mpx","Charge":"67W Turbo"},
-  cap:[{c:"256 Go",p:165000,s:6}],col:[{n:"Noir Minuit",h:"#000000"}]}
-];
+const SET0 = {storeName:"MARO BRUTAF TECH", wa:"22662212122", adresse:"Koulouba, Ouagadougou", horaires:"Lun-Sam : 08h-20h", aproposTitre:"Votre expert mobile", aproposTexte:"Vente et Troc sécurisés."};
 
 let produits = [], SET = {...SET0}, panier = [];
 function lire(k, def){ try{ return JSON.parse(localStorage.getItem("maro_" + k)) ?? def; }catch{ return def; } }
 function ecrire(k, v){ try{ localStorage.setItem("maro_" + k, JSON.stringify(v)); }catch{} }
 
 async function chargerDonnees(){
-    // Le panier reste stocké localement sur le téléphone du client
     panier = lire("c", []) || []; 
-
-    // 1. Récupération des vrais produits depuis Supabase
-    const { data: dbProducts, error: errP } = await supabase
-        .from('products')
-        .select('*')
-        .order('id', { ascending: false });
-        
+    const { data: dbProducts, error: errP } = await supabase.from('products').select('*').order('id', { ascending: false });
     if (!errP && dbProducts) {
         produits = dbProducts.map(dbP => ({
-            id: dbP.id,
-            cat: dbP.category,
-            marque: dbP.brand,
-            modele: dbP.model,
-            etat: dbP.condition_label,
-            desc: dbP.description,
-            image: dbP.image_url,
-            specs: dbP.specs,
-            cap: dbP.capacities,
-            col: dbP.colors,
-            nouveau: dbP.is_new,
-            troc: dbP.trade_in,
-            visible: dbP.is_visible
+            id: dbP.id, cat: dbP.category, marque: dbP.brand, modele: dbP.model, etat: dbP.condition_label,
+            desc: dbP.description, image: dbP.image_url, specs: dbP.specs, cap: dbP.capacities, col: dbP.colors,
+            nouveau: dbP.is_new, troc: dbP.trade_in, visible: dbP.is_visible
         }));
     } else {
         produits = [];
-        console.error("Erreur de chargement des produits :", errP);
     }
 
-    // 2. Récupération des paramètres de la boutique
-    const { data: dbSettings, error: errS } = await supabase
-        .from('store_settings')
-        .select('*')
-        .single();
-        
+    const { data: dbSettings, error: errS } = await supabase.from('store_settings').select('*').single();
     if (!errS && dbSettings) {
         SET = {
-            storeName: dbSettings.store_name,
-            wa: dbSettings.whatsapp,
-            adresse: dbSettings.address,
-            horaires: dbSettings.opening_hours,
-            aproposTitre: dbSettings.about_title,
-            aproposTexte: dbSettings.about_text,
-            annonce: dbSettings.announcement,
-            facebook: dbSettings.facebook_url,
-            instagram: dbSettings.instagram_url
+            storeName: dbSettings.store_name, wa: dbSettings.whatsapp, adresse: dbSettings.address,
+            horaires: dbSettings.opening_hours, aproposTitre: dbSettings.about_title, aproposTexte: dbSettings.about_text,
+            annonce: dbSettings.announcement, facebook: dbSettings.facebook_url, instagram: dbSettings.instagram_url
         };
     } else {
         SET = {...SET0};
     }
-    
     if($("stat-prods")) $("stat-prods").textContent = produits.length;
 }
 
@@ -395,47 +442,29 @@ const stockTot = p => p.cap.reduce((s, v) => s + (+v.s || 0), 0);
 const prixMin = p => { const a = p.cap.map(v => +v.p).filter(x => x > 0); return a.length ? Math.min(...a) : 0; };
 const libelle = l => { const p = prod(l.id), v = p.cap[l.vi]; return `${p.modele} (${v.c})`; };
 
-/* ========================================== */
-/* ROUTEUR (SPA ARCHITECTURE)                 */
-/* ========================================== */
 function checkAuth() { return sessionStorage.getItem('maro_admin_token') === '1'; }
 
 function handleRouting() {
     const hash = window.location.hash;
-    
-    // Branche ADMINISTRATION
     if (hash === '#admin') {
-        $('layout-public').classList.add('hidden');
-        $('layout-public').classList.remove('flex');
-        $('layout-admin').classList.remove('hidden');
-        $('layout-admin').classList.add('flex');
-        
+        $('layout-public').classList.add('hidden'); $('layout-public').classList.remove('flex');
+        $('layout-admin').classList.remove('hidden'); $('layout-admin').classList.add('flex');
         if (checkAuth()) {
             $('vue-login').classList.add('hidden');
-            $('vue-dashboard').classList.remove('hidden');
-            $('vue-dashboard').classList.add('flex');
+            $('vue-dashboard').classList.remove('hidden'); $('vue-dashboard').classList.add('flex');
             renderAdminDashboard();
         } else {
-            $('vue-dashboard').classList.add('hidden');
-            $('vue-dashboard').classList.remove('flex');
+            $('vue-dashboard').classList.add('hidden'); $('vue-dashboard').classList.remove('flex');
             $('vue-login').classList.remove('hidden');
         }
-    } 
-    // Branche BOUTIQUE PUBLIQUE
-    else {
-        $('layout-admin').classList.add('hidden');
-        $('layout-admin').classList.remove('flex');
-        $('layout-public').classList.remove('hidden');
-        $('layout-public').classList.add('flex');
-        
-        // Navigation interne publique
-        const page = hash.replace('#', '') || 'accueil';
-        naviguerVers(page);
+    } else {
+        $('layout-admin').classList.add('hidden'); $('layout-admin').classList.remove('flex');
+        $('layout-public').classList.remove('hidden'); $('layout-public').classList.add('flex');
+        naviguerVers(hash.replace('#', '') || 'accueil');
     }
 }
 window.addEventListener('hashchange', handleRouting);
 
-/* ---------- LOGIQUE BOUTIQUE PUBLIQUE ---------- */
 let categorieActive = "tous", produitActifId = null, sel = {vi:0, ci:0}, qty = 1;
 
 function naviguerVers(page){
@@ -443,12 +472,10 @@ function naviguerVers(page){
     const target = $("vue-" + page) || $("vue-accueil");
     target.classList.add("active");
     window.scrollTo({top:0});
-    
     document.querySelectorAll(".nav-link").forEach(el => {
         const on = el.dataset.target === page;
         el.classList.toggle("text-gold-500", on); el.classList.toggle("text-gray-400", !on);
     });
-    
     if(page === "boutique") afficherCatalogue();
     if(page === "accueil") afficherAccueil();
     if(page === "contact") majContact();
@@ -464,7 +491,7 @@ function cartePure(p){
         </div>
         <div class="p-6 flex flex-col flex-grow justify-between"><div>
             <div class="flex justify-between items-start gap-2"><h3 class="font-bold text-lg text-white leading-tight">${esc(p.modele)}</h3><span class="text-xs bg-white/10 text-gray-300 px-2 py-0.5 rounded">${esc(p.marque)}</span></div>
-            <p class="text-xs text-gray-500 mt-3">${pm ? "À partir de" : "&nbsp;"}</p>
+            <p class="text-xs text-gray-500 mt-3">${pm ? "À partir de" : " "}</p>
             <p class="text-2xl font-extrabold text-gold-500">${pm ? fcfa(pm) : "Prix sur demande"}</p></div>
             <button class="btn b-wh mt-5 w-full">Voir le produit</button></div></div>`;
 }
@@ -492,11 +519,8 @@ function ouvrirDetails(id){
     produitActifId = id; qty = 1; sel = {vi: Math.max(0, p.cap.findIndex(v => +v.s > 0)), ci: 0};
     $("dt-ariane-nom").textContent = p.modele; $("dt-nom").textContent = p.modele; $("dt-desc").textContent = p.desc || "";
     $("dt-image-main").src = p.image || NOIMG;
-    
-    // Les étiquettes Neuf/Venue/Troc sont affichées ICI, au niveau des détails
     $("dt-badges").innerHTML = `<span class="${p.etat === "neuf" ? "bg-green-600 text-white" : "bg-amber-500 text-black"} text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-md">${esc(ETAT[p.etat] || "")}</span>`
         + (p.troc ? '<span class="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-md flex items-center gap-1"><svg class="ic"><use href="#i-rotate"/></svg> Troc accepté</span>' : "");
-    
     const sim = p.specs && p.specs.SIM; $("dt-bloc-sim").classList.toggle("hidden", !sim); $("dt-sim").textContent = sim || "";
     $("dt-bloc-cap").classList.toggle("hidden", p.cap.length === 1 && p.cap[0].c === "Standard");
     $("dt-capacites").innerHTML = p.cap.map((v, i) => `<div><input type="radio" name="dt-cap" id="cap-${i}" class="cap-radio hidden" ${i === sel.vi ? "checked" : ""} onchange="choisir('vi',${i})"><label for="cap-${i}" class="cursor-pointer border border-white/20 rounded-lg px-4 py-2 text-sm font-medium text-gray-300 hover:border-gold-500 transition block ${+v.s > 0 ? "" : "opacity-50 line-through"}">${esc(v.c)}</label></div>`).join("");
@@ -566,11 +590,12 @@ function validerCommande(e){
 /* Troc */
 function ouvrirTroc(id){
     const o = ['<option value="">Choisissez le téléphone que vous souhaitez</option>'];
-    produits.filter(p => p.visible !== false && p.troc).forEach(p => p.cap.forEach((v, i) => { if(+v.s>0) o.push(`<option value="${p.id}:${i}">${esc(p.modele)}${v.c !== "Standard" ? " · " + esc(v.c) : ""}${+v.p ? " · " + fcfa(v.p) : ""}</option>`); }));
+    // LIGNE CORRIGÉE ICI : On affiche désormais tous les articles visibles, sans filtrer par p.troc
+    produits.filter(p => p.visible !== false).forEach(p => p.cap.forEach((v, i) => { if(+v.s>0) o.push(`<option value="${p.id}:${i}">${esc(p.modele)}${v.c !== "Standard" ? " · " + esc(v.c) : ""}${+v.p ? " · " + fcfa(v.p) : ""}</option>`); }));
     o.push('<option value="autre">Autre modèle (à préciser)</option>');
     $("t-cible").innerHTML = o.join("");
     const p = id ? prod(id) : null;
-    if(p && p.troc && p.cap[sel.vi] && +p.cap[sel.vi].s > 0) $("t-cible").value = `${p.id}:${id == produitActifId ? sel.vi : 0}`;
+    if(p && p.cap[sel.vi] && +p.cap[sel.vi].s > 0) $("t-cible").value = `${p.id}:${id == produitActifId ? sel.vi : 0}`;
     majTrocAutre(); $("modal-troc").showModal();
 }
 function majTrocAutre(){ const a = $("t-cible").value === "autre"; $("t-autre").classList.toggle("hidden", !a); $("t-autre").required = a; }
@@ -589,18 +614,15 @@ function redirigerWhatsApp(msg){
     window.open(`https://wa.me/${n}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
 }
 function fermerModal(id) { $(id).close(); }
-function majContact(){
-    $("contact-infos").innerHTML = [["Adresse", SET.adresse], ["Horaires", SET.horaires]].filter(x => x[1]).map(([k, v]) => `<div><dt class="text-gray-500 mb-1">${k}</dt><dd class="font-medium text-white">${esc(v)}</dd></div>`).join("");
-}
+function majContact() { /* La mise à jour est désormais figée en HTML */ }
 
 /* ---------- LOGIQUE ADMINISTRATION ---------- */
 $("f-login").addEventListener("submit", e => {
     e.preventDefault();
     const mail = $("l-mail").value; const mdp = $("l-mdp").value;
-    // Simulation basique d'authentification pour le prototype
     if(mail === "admin@maro.bf" && mdp === "admin") {
         sessionStorage.setItem('maro_admin_token', '1');
-        handleRouting(); // Re-trigger le routage pour afficher le dashboard
+        handleRouting();
     } else {
         alert("Identifiants incorrects. Testez avec admin@maro.bf / admin");
     }
@@ -616,7 +638,6 @@ function renderAdminDashboard() {
         <div class="md:w-1/3"><p class="text-white font-bold">${esc(p.modele)}</p><p class="text-xs text-gray-500">${esc(p.marque)}</p></div>
         <div class="flex-1 space-y-2">${p.cap.map((v, i) => `<div class="flex items-center gap-3 text-sm text-gray-300"><span class="w-20 shrink-0 truncate">${esc(v.c)}</span>
             <div class="flex gap-2 items-center"><span class="text-xs text-gray-500">Prix</span><input type="number" min="0" step="1000" value="${+v.p || 0}" data-f="p" data-id="${p.id}" data-v="${i}" class="inp py-1 w-28 text-right"></div>
-            
         </div>`).join("")}</div>
     </div>`).join("");
 }
@@ -624,7 +645,7 @@ function renderAdminDashboard() {
 $("adm-liste").addEventListener("change", e => {
     const t = e.target, d = t.dataset; if(!d.f) return; const p = prod(d.id);
     if(d.f !== "p") return; p.cap[+d.v].p = Math.max(0, num(t.value));
-    ecrire("p", produits); // Sauvegarde automatique en localStorage
+    ecrire("p", produits);
 });
 
 /* ---------- INITIALISATION ---------- */
@@ -632,20 +653,15 @@ $("adm-liste").addEventListener("change", e => {
     await chargerDonnees();
     nettoyerCart();
     
-    // Header Infos
     const nomBoutique = String(SET.storeName || "MARO BRUTAF TECH");
     $("brand-nav").innerHTML = esc(nomBoutique) + '<span class="text-gold-500">.</span>';
     $("brand-footer").innerHTML = esc(nomBoutique) + '<span class="text-gold-500">.</span>';
     $("topbar").classList.toggle("hidden", !SET.annonce); $("annonce").textContent = SET.annonce;
-    const url = u => /^https?:\/\//.test(u) ? u : "", wa = String(SET.wa).replace(/\D/g, "");
-    $("ft-social").innerHTML = [[url(SET.facebook), "fa-facebook"], [url(SET.instagram), "fa-instagram"], [wa.length >= 8 ? "https://wa.me/" + wa : "", "fa-whatsapp"]].filter(x => x[0]).map(([u, i]) => `<a href="${esc(u)}" target="_blank" rel="noopener" class="hover:text-white text-lg"><svg class="ic"><use href="#i-${i.slice(3)}"/></svg></a>`).join("");
-    $("ft-info").textContent = ["© 2026 Maro Brutaf Tech.", SET.adresse].filter(Boolean).join(" · ");
     
-    // Textes A propos
     $("ap-titre").textContent = SET.aproposTitre;
     $("ap-texte").innerHTML = String(SET.aproposTexte).split("\n").map(t => `<p>${esc(t)}</p>`).join("");
     
-    handleRouting(); // Lance l'aiguilleur
+    handleRouting();
 })();
 </script>
 </body>

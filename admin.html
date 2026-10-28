@@ -26,7 +26,6 @@
           <p id="login-error" class="error" role="alert" hidden>Identifiants incorrects. Vérifiez votre adresse e-mail et votre mot de passe.</p>
         </form>
         <a class="back-link" href="index.html">← Retour à la boutique</a>
-        <p class="prototype-note"><strong>Prototype :</strong> la connexion est simulée dans ce navigateur. Elle ne protège pas encore un vrai site en ligne.</p>
       </div>
     </section>
 
@@ -37,7 +36,7 @@
       </header>
       <div class="content">
         <div class="welcome-row"><div><p class="eyebrow">VOTRE BOUTIQUE</p><h1>Tableau de bord</h1><p class="muted">Gérez les produits, les prix, les photos et les informations de la boutique.</p></div><a href="index.html" class="btn btn-primary desktop-action">Voir la boutique ↗</a></div>
-        <div class="prototype-banner"><strong>Mode prototype</strong><span>Les changements sont enregistrés dans ce navigateur uniquement. La synchronisation Supabase viendra ensuite.</span></div>
+        
         <div class="stats-grid">
           <article class="stat-card"><span class="stat-icon">▣</span><p class="muted">Produits enregistrés</p><strong id="stat-products">0</strong></article>
           <article class="stat-card"><span class="stat-icon">✓</span><p class="muted">Produits visibles</p><strong id="stat-visible">0</strong></article>
@@ -68,7 +67,7 @@
             <div class="field-full"><button class="btn btn-primary" type="submit">Enregistrer les informations</button><span id="settings-feedback" class="feedback" role="status"></span></div>
           </form>
         </section>
-        <footer class="admin-footer">MARO BRUTAF TECH · Espace gérant · Prototype</footer>
+        <footer class="admin-footer">MARO BRUTAF TECH · Espace gérant</footer>
       </div>
     </section>
   </main>
@@ -89,7 +88,6 @@
         <div class="field-full subsection"><div class="subsection-head"><div><h3>Couleurs</h3><p class="muted">Nom et couleur d'affichage.</p></div><button id="add-color" type="button" class="btn btn-outline btn-small">＋ Couleur</button></div><div id="colors-list"></div></div>
       </div>
       <div class="dialog-actions"><button id="cancel-product" class="btn btn-outline" type="button">Annuler</button><button class="btn btn-primary" type="submit">Enregistrer le produit</button></div>
-      <p class="small-note">Les photos seront téléversées dans Supabase Storage lors de la phase backend. Pour le moment, un lien d'image est utilisé.</p>
     </form>
   </dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
