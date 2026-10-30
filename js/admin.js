@@ -91,7 +91,7 @@
   function renderStats(){ $('stat-products').textContent=products.length; $('stat-visible').textContent=products.filter(p=>p.visible!==false).length; }
   
   function renderProducts(){
-    const list=$('product-list');$('empty-products').hidden=products.length!==0;
+    const list=$('product-list'); $('empty-products').hidden=products.length!==0;
     list.innerHTML=products.map(p=>{
       const image=p.image || '';
       const variants=(p.cap||[]).map((v,i)=>`<div class="variant-editor"><div class="variant-editor-top"><strong>${escapeHtml(v.c||'Standard')}</strong></div><div class="variant-fields variant-fields-single"><label>Prix (FCFA)<input type="number" min="0" step="500" data-price-id="${p.id}" data-variant="${i}" value="${Number(v.p)||0}" aria-label="Prix ${escapeHtml(v.c)}"></label></div></div>`).join('');
@@ -152,8 +152,8 @@
     f.elements.marque.value=product?.marque||'';
     f.elements.cat.value=product?.cat||'android';
     f.elements.etat.value=product?.etat||'neuf';
-    f.elements.image.value=''; // Réinitialise le champ fichier (obligatoire en HTML)
-    f.elements.image.required=!product; // Requis uniquement pour un nouveau produit
+    f.elements.image.value='';
+    f.elements.image.required=!product;
     f.elements.desc.value=product?.desc||'';
     f.elements.nouveau.checked=!!product?.nouveau;
     f.elements.troc.checked=!!product?.troc;
@@ -164,10 +164,15 @@
   }
   
   $('add-product').addEventListener('click',()=>openProductForm());
-  $('add-variant').addEventListener('click',()=>addVariantRow({c:'',p:0}));$('add-color').addEventListener('click',()=>addColorRow({n:'',h:'#222222'}));
+  $('add-variant').addEventListener('click',()=>addVariantRow({c:'',p:0}));
+  $('add-color').addEventListener('click',()=>addColorRow({n:'',h:'#222222'}));
   
-  function closeDialog(){$('product-dialog').close();}$('close-dialog').addEventListener('click',closeDialog);
-  $('cancel-product').addEventListener('click',closeDialog);  // 2. SAUVEGARDE PRODUITS (Avec upload d'image)$('product-form').addEventListener('submit', async e => {
+  function closeDialog(){$('product-dialog').close();} 
+  $('close-dialog').addEventListener('click',closeDialog);
+  $('cancel-product').addEventListener('click',closeDialog);
+  
+  // 2. SAUVEGARDE PRODUITS (Avec upload d'image)
+  $('product-form').addEventListener('submit', async e => {
     e.preventDefault();
     const f=e.currentTarget;
     const submitBtn = f.querySelector('button[type="submit"]');
@@ -248,4 +253,33 @@
   }
   
   // 3. SAUVEGARDE PARAMÈTRES
-  $('settings-form').
+  $('settings-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const f=e.currentTarget;
+    
+    const dbSettings = {
+      id: 1,
+      store_name: f.elements.storeName.value.trim(),
+      whatsapp: f.elements.wa.value.trim(),
+      address: f.elements.adresse.value.trim(),
+      opening_hours: f.elements.horaires.value.trim(),
+      about_title: f.elements.aproposTitre.value.trim(),
+      about_text: f.elements.aproposTexte.value.trim(),
+      announcement: f.elements.annonce.value.trim(),
+      facebook_url: f.elements.facebook.value.trim(),
+      instagram_url: f.elements.instagram.value.trim()
+    };
+    
+    const { error } = await supabase.from('store_settings').upsert(dbSettings);
+    if(error) {
+       $('settings-feedback').textContent = 'Action bloquée par la sécurité : ' + error.message;
+    } else {
+       await loadData();
+       $('settings-feedback').textContent = 'Enregistré sur Supabase.';
+       showToast('Informations enregistrées.');
+       setTimeout(()=>$('settings-feedback').textContent='',3500);
+    }
+  });
+  
+  if(sessionStorage.getItem('maro_admin_token')) showDashboard();
+})();
