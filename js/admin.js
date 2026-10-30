@@ -1,12 +1,12 @@
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
-  const DEFAULT_SETTINGS = {id: 1, wa:'2130670462357', adresse:'Koulouba, Ouagadougou', horaires:'Lun-Sam : 08h-20h', aproposTitre:'Votre expert mobile', aproposTexte:'Vente et Troc sécurisés.', annonce:'', facebook:'', instagram:''};
+  const DEFAULT_SETTINGS = {id: 1, wa:'22662212122', adresse:'Koulouba, Ouagadougou', horaires:'Lun-Sam : 08h-20h', aproposTitre:'Votre expert mobile', aproposTexte:'Vente et Troc sécurisés.', annonce:'', facebook:'', instagram:''};
   
   let products = [], settings = {}, editingId = null, toastTimer = null;
-  const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'''}[c]));
   
-  // 1. CHARGEMENT : Convertit l'anglais (Base de données) vers le français (Interface)
+  // 1. CHARGEMENT
   async function loadData() {
     const { data: dbProducts, error: errP } = await supabase.from('products').select('*').order('id', { ascending: false });
     if (!errP && dbProducts) {
@@ -91,7 +91,7 @@
   function renderStats(){ $('stat-products').textContent=products.length; $('stat-visible').textContent=products.filter(p=>p.visible!==false).length; }
   
   function renderProducts(){
-    const list=$('product-list'); $('empty-products').hidden=products.length!==0;
+    const list=$('product-list');$('empty-products').hidden=products.length!==0;
     list.innerHTML=products.map(p=>{
       const image=p.image || '';
       const variants=(p.cap||[]).map((v,i)=>`<div class="variant-editor"><div class="variant-editor-top"><strong>${escapeHtml(v.c||'Standard')}</strong></div><div class="variant-fields variant-fields-single"><label>Prix (FCFA)<input type="number" min="0" step="500" data-price-id="${p.id}" data-variant="${i}" value="${Number(v.p)||0}" aria-label="Prix ${escapeHtml(v.c)}"></label></div></div>`).join('');
@@ -143,48 +143,99 @@
 
   function addVariantRow(data={c:'128 Go',p:0}){const row=document.createElement('div');row.className='variant-row variant-row-price-only';row.innerHTML=`<input data-v-field="c" aria-label="Capacité" placeholder="128 Go" value="${escapeHtml(data.c)}" required><input data-v-field="p" aria-label="Prix FCFA" type="number" min="0" step="500" placeholder="Prix FCFA" value="${Number(data.p)||0}" required><button type="button" class="remove-row" aria-label="Retirer cette capacité">×</button>`;row.querySelector('.remove-row').addEventListener('click',()=>{if($('variants-list').children.length>1)row.remove();else showToast('Gardez au moins une capacité.');});$('variants-list').appendChild(row);}
   function addColorRow(data={n:'Noir',h:'#222222'}){const row=document.createElement('div');row.className='color-row';row.innerHTML=`<input data-c-field="n" aria-label="Nom de la couleur" placeholder="Noir" value="${escapeHtml(data.n)}" required><input data-c-field="h" aria-label="Code couleur" type="text" pattern="^#([0-9a-fA-F]{6})$" placeholder="#222222" value="${escapeHtml(data.h)}" required><button type="button" class="remove-row" aria-label="Retirer cette couleur">×</button>`;row.querySelector('.remove-row').addEventListener('click',()=>{if($('colors-list').children.length>1)row.remove();else showToast('Gardez au moins une couleur.');});$('colors-list').appendChild(row);}
-  function openProductForm(product=null){editingId=product?product.id:null;const f=$('product-form');f.reset();f.elements.id.value=product?product.id:'';$('product-dialog-title').textContent=product?'Modifier le téléphone':'Ajouter un téléphone';
-    f.elements.modele.value=product?.modele||'';f.elements.marque.value=product?.marque||'';f.elements.cat.value=product?.cat||'android';f.elements.etat.value=product?.etat||'neuf';f.elements.image.value=product?.image||'';f.elements.desc.value=product?.desc||'';f.elements.nouveau.checked=!!product?.nouveau;f.elements.troc.checked=!!product?.troc;f.elements.visible.checked=product?product.visible!==false:true;
-    $('variants-list').innerHTML='';(product?.cap?.length?product.cap:[{c:'128 Go',p:0}]).forEach(addVariantRow);$('colors-list').innerHTML='';(product?.col?.length?product.col:[{n:'Noir',h:'#222222'}]).forEach(addColorRow);$('product-dialog').showModal();
-  }
-  $('add-product').addEventListener('click',()=>openProductForm());$('add-variant').addEventListener('click',()=>addVariantRow({c:'',p:0}));$('add-color').addEventListener('click',()=>addColorRow({n:'',h:'#222222'}));
-  function closeDialog(){$('product-dialog').close();} $('close-dialog').addEventListener('click',closeDialog);$('cancel-product').addEventListener('click',closeDialog);
   
-  // 2. SAUVEGARDE PRODUITS : Convertit le français (Interface) vers l'anglais (Base de données)
-  $('product-form').addEventListener('submit', async e => {
+  function openProductForm(product=null){
+    editingId=product?product.id:null;
+    const f=$('product-form');f.reset();f.elements.id.value=product?product.id:'';
+    $('product-dialog-title').textContent=product?'Modifier le téléphone':'Ajouter un téléphone';
+    f.elements.modele.value=product?.modele||'';
+    f.elements.marque.value=product?.marque||'';
+    f.elements.cat.value=product?.cat||'android';
+    f.elements.etat.value=product?.etat||'neuf';
+    f.elements.image.value=''; // Réinitialise le champ fichier (obligatoire en HTML)
+    f.elements.image.required=!product; // Requis uniquement pour un nouveau produit
+    f.elements.desc.value=product?.desc||'';
+    f.elements.nouveau.checked=!!product?.nouveau;
+    f.elements.troc.checked=!!product?.troc;
+    f.elements.visible.checked=product?product.visible!==false:true;
+    $('variants-list').innerHTML='';(product?.cap?.length?product.cap:[{c:'128 Go',p:0}]).forEach(addVariantRow);
+    $('colors-list').innerHTML='';(product?.col?.length?product.col:[{n:'Noir',h:'#222222'}]).forEach(addColorRow);
+    $('product-dialog').showModal();
+  }
+  
+  $('add-product').addEventListener('click',()=>openProductForm());
+  $('add-variant').addEventListener('click',()=>addVariantRow({c:'',p:0}));$('add-color').addEventListener('click',()=>addColorRow({n:'',h:'#222222'}));
+  
+  function closeDialog(){$('product-dialog').close();}$('close-dialog').addEventListener('click',closeDialog);
+  $('cancel-product').addEventListener('click',closeDialog);  // 2. SAUVEGARDE PRODUITS (Avec upload d'image)$('product-form').addEventListener('submit', async e => {
     e.preventDefault();
     const f=e.currentTarget;
+    const submitBtn = f.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
     const cap=[...$('variants-list').querySelectorAll('.variant-row')].map(row=>({c:row.querySelector('[data-v-field="c"]').value.trim(),p:Math.max(0,Number(row.querySelector('[data-v-field="p"]').value)||0),s:99}));
     const col=[...$('colors-list').querySelectorAll('.color-row')].map(row=>({n:row.querySelector('[data-c-field="n"]').value.trim(),h:row.querySelector('[data-c-field="h"]').value.trim()}));
     
     if(!cap.length||cap.some(v=>!v.c)||!col.length||col.some(c=>!c.n||!/^#([0-9a-fA-F]{6})$/.test(c.h))){showToast('Vérifiez les capacités et les couleurs.');return;}
     
-    const old=editingId?products.find(p=>p.id===editingId):null;
-    
-    const dbItem = {
-      category: f.elements.cat.value,
-      brand: f.elements.marque.value.trim(),
-      model: f.elements.modele.value.trim(),
-      condition_label: f.elements.etat.value,
-      is_new: f.elements.nouveau.checked,
-      trade_in: f.elements.troc.checked,
-      is_visible: f.elements.visible.checked,
-      image_url: f.elements.image.value.trim(),
-      description: f.elements.desc.value.trim(),
-      specs: old?.specs||{},
-      capacities: cap,
-      colors: col
-    };
-    if(old) dbItem.id = old.id; // On ajoute l'ID seulement si c'est une modification
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Téléversement...';
 
-    const { error } = await supabase.from('products').upsert(dbItem);
-    if(error) {
-       showToast('Action bloquée par la sécurité : ' + error.message);
-    } else {
-       await loadData(); // Recharge depuis la base de données
-       renderProducts(); renderStats();
-       closeDialog();
-       showToast(old ? 'Produit modifié.' : 'Téléphone ajouté à la boutique.');
+    try {
+      const old=editingId?products.find(p=>p.id===editingId):null;
+      
+      // Gestion de l'image
+      let imageUrl = old ? old.image : '';
+      const imageFile = f.elements.image.files[0];
+      
+      if (imageFile) {
+          const fileExt = imageFile.name.split('.').pop();
+          const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+          
+          const { error: uploadError } = await supabase.storage.from('product-images').upload(fileName, imageFile);
+          if (uploadError) {
+              showToast('Erreur upload : ' + uploadError.message);
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+              return;
+          }
+          
+          const { data: publicUrlData } = supabase.storage.from('product-images').getPublicUrl(fileName);
+          imageUrl = publicUrlData.publicUrl;
+      }
+      
+      // Enregistrement BD
+      const dbItem = {
+        category: f.elements.cat.value,
+        brand: f.elements.marque.value.trim(),
+        model: f.elements.modele.value.trim(),
+        condition_label: f.elements.etat.value,
+        is_new: f.elements.nouveau.checked,
+        trade_in: f.elements.troc.checked,
+        is_visible: f.elements.visible.checked,
+        image_url: imageUrl,
+        description: f.elements.desc.value.trim(),
+        specs: old?.specs||{},
+        capacities: cap,
+        colors: col
+      };
+      if(old) dbItem.id = old.id;
+
+      const { error } = await supabase.from('products').upsert(dbItem);
+      if(error) {
+         showToast('Action bloquée par la sécurité : ' + error.message);
+      } else {
+         await loadData();
+         renderProducts(); renderStats();
+         closeDialog();
+         showToast(old ? 'Produit modifié.' : 'Téléphone ajouté à la boutique.');
+      }
+    } catch (err) {
+        showToast('Une erreur est survenue.');
+        console.error(err);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
     }
   });
 
@@ -196,34 +247,5 @@
     });
   }
   
-  // 3. SAUVEGARDE PARAMÈTRES : Convertit le français (Interface) vers l'anglais (Base de données)
-  $('settings-form').addEventListener('submit', async e => {
-    e.preventDefault();
-    const f=e.currentTarget;
-    
-    const dbSettings = {
-      id: 1,
-      store_name: f.elements.storeName.value.trim(),
-      whatsapp: f.elements.wa.value.trim(),
-      address: f.elements.adresse.value.trim(),
-      opening_hours: f.elements.horaires.value.trim(),
-      about_title: f.elements.aproposTitre.value.trim(),
-      about_text: f.elements.aproposTexte.value.trim(),
-      announcement: f.elements.annonce.value.trim(),
-      facebook_url: f.elements.facebook.value.trim(),
-      instagram_url: f.elements.instagram.value.trim()
-    };
-    
-    const { error } = await supabase.from('store_settings').upsert(dbSettings);
-    if(error) {
-       $('settings-feedback').textContent = 'Action bloquée par la sécurité : ' + error.message;
-    } else {
-       await loadData();
-       $('settings-feedback').textContent = 'Enregistré sur Supabase.';
-       showToast('Informations enregistrées.');
-       setTimeout(()=>$('settings-feedback').textContent='',3500);
-    }
-  });
-  
-  if(sessionStorage.getItem('maro_admin_token')) showDashboard();
-})();
+  // 3. SAUVEGARDE PARAMÈTRES
+  $('settings-form').

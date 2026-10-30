@@ -81,7 +81,11 @@
         <label>Marque<input name="marque" required placeholder="Ex. Samsung"></label>
         <label>Catégorie<select name="cat"><option value="iphone">iPhone</option><option value="android" selected>Téléphone Android</option><option value="accessoires">Accessoire</option></select></label>
         <label>État<select name="etat"><option value="neuf">Neuf scellé</option><option value="venue">Très propre</option><option value="occasion">Occasion</option></select></label>
-        <label class="field-full">Lien de la photo <small>Prototype actuel : utilisez une image déjà en ligne.</small><input name="image" type="url" placeholder="https://..."></label>
+        
+        <label class="field-full">Photo du téléphone <small>Format JPG, PNG ou WEBP</small>
+          <input id="image-upload" type="file" accept="image/png, image/jpeg, image/webp" class="inp" required>
+        </label>
+        
         <label class="field-full">Description<textarea name="desc" rows="3" placeholder="Décrivez le téléphone."></textarea></label>
         <div class="field-full option-row"><label class="check-label"><input name="nouveau" type="checkbox"> Afficher dans les nouveautés</label><label class="check-label"><input name="troc" type="checkbox"> Accepter les propositions de troc</label><label class="check-label"><input name="visible" type="checkbox" checked> Afficher dans la boutique</label></div>
         <div class="field-full subsection"><div class="subsection-head"><div><h3>Capacités et prix</h3><p class="muted">Ajoutez une ligne par capacité et son prix.</p></div><button id="add-variant" type="button" class="btn btn-outline btn-small">＋ Capacité</button></div><div id="variants-list"></div></div>
