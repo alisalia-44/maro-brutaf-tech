@@ -63,22 +63,42 @@
       $('dashboard').hidden=true; 
       $('login-panel').hidden=false; 
       $('login-password').value=''; 
+      $('login-error').hidden=true;
   }
 
+  // GESTION DE LA CONNEXION SUPABASE
   $('login-form').addEventListener('submit', async e => { 
       e.preventDefault(); 
       const email = $('login-email').value.trim().toLowerCase(); 
       const password = $('login-password').value; 
       
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) {
-          $('login-error').textContent = "Erreur : " + error.message;
-          $('login-error').hidden = false;
-      } else {
-          sessionStorage.setItem('maro_admin_token', data.session.access_token); 
-          $('login-error').hidden = true; 
-          showDashboard();
-      } 
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const errorLabel = $('login-error');
+      
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Connexion en cours...';
+      errorLabel.hidden = true;
+      
+      try {
+          const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+          
+          if (error) {
+              // Message d'erreur personnalisé basé sur le retour Supabase
+              errorLabel.textContent = error.message === "Invalid login credentials" 
+                  ? "Email ou mot de passe incorrect." 
+                  : "Erreur de connexion : " + error.message;
+              errorLabel.hidden = false;
+          } else if (data.session) {
+              sessionStorage.setItem('maro_admin_token', data.session.access_token); 
+              showDashboard();
+          }
+      } catch (err) {
+          errorLabel.textContent = "Erreur de réseau. Veuillez réessayer.";
+          errorLabel.hidden = false;
+      } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Se connecter <span aria-hidden="true">→</span>';
+      }
   });
 
   $('logout-button').addEventListener('click', logout);
@@ -152,8 +172,8 @@
     f.elements.marque.value=product?.marque||'';
     f.elements.cat.value=product?.cat||'android';
     f.elements.etat.value=product?.etat||'neuf';
-    f.elements.image.value='';
-    f.elements.image.required=!product;
+    f.elements.image.value=''; // Réinitialise le champ fichier (obligatoire en HTML)
+    f.elements.image.required=!product; // Requis uniquement pour un nouveau produit
     f.elements.desc.value=product?.desc||'';
     f.elements.nouveau.checked=!!product?.nouveau;
     f.elements.troc.checked=!!product?.troc;
@@ -281,5 +301,11 @@
     }
   });
   
-  if(sessionStorage.getItem('maro_admin_token')) showDashboard();
+  // Validation initiale de session
+  if (sessionStorage.getItem('maro_admin_token')) {
+      supabase.auth.getSession().then(({ data }) => {
+          if (data.session) showDashboard();
+          else logout();
+      });
+  }
 })();
