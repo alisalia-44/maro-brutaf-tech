@@ -4,7 +4,12 @@
   const DEFAULT_SETTINGS = {id: 1, wa:'22662212122', adresse:'Koulouba, Ouagadougou', horaires:'Lun-Sam : 08h-20h', aproposTitre:'Votre expert mobile', aproposTexte:'Vente et Troc sécurisés.', annonce:'', facebook:'', instagram:''};
   
   let products = [], settings = {}, editingId = null, toastTimer = null;
-  const escapeHtml = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&','<':'<','>':'>','"':'"',"'":'''}[c]));
+  
+  // Fonction sécurisée pour éviter le plantage de syntaxe
+  const escapeHtml = (v) => {
+      const map = { '&': '&', '<': '<', '>': '>', '"': '"', "'": ''' };
+      return String(v ?? '').replace(/[&<>"']/g, m => map[m]);
+  };
   
   // 1. CHARGEMENT
   async function loadData() {
@@ -83,7 +88,6 @@
           const { data, error } = await supabase.auth.signInWithPassword({ email, password });
           
           if (error) {
-              // Message d'erreur personnalisé basé sur le retour Supabase
               errorLabel.textContent = error.message === "Invalid login credentials" 
                   ? "Email ou mot de passe incorrect." 
                   : "Erreur de connexion : " + error.message;
@@ -172,8 +176,8 @@
     f.elements.marque.value=product?.marque||'';
     f.elements.cat.value=product?.cat||'android';
     f.elements.etat.value=product?.etat||'neuf';
-    f.elements.image.value=''; // Réinitialise le champ fichier (obligatoire en HTML)
-    f.elements.image.required=!product; // Requis uniquement pour un nouveau produit
+    f.elements.image.value='';
+    f.elements.image.required=!product;
     f.elements.desc.value=product?.desc||'';
     f.elements.nouveau.checked=!!product?.nouveau;
     f.elements.troc.checked=!!product?.troc;
