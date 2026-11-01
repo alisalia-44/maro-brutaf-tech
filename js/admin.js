@@ -7,7 +7,7 @@
   
   // Fonction sécurisée pour éviter le plantage de syntaxe
   const escapeHtml = (v) => {
-      const map = { '&': '&', '<': '<', '>': '>', '"': '"', "'": ''' };
+      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
       return String(v ?? '').replace(/[&<>"']/g, m => map[m]);
   };
   
