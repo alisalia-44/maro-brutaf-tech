@@ -90,7 +90,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                         </div>
                     </div>
                     <div class="md:w-1/2 relative flex justify-center hero-glow">
-                        <img src="images.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=100'" alt="Smartphone" class="relative z-10 w-full max-w-[320px] lg:max-w-[400px] object-contain drop-shadow-2xl transform hover:scale-105 transition duration-700">
+                        <img src="hero-iphone.jpg" alt="iPhone 18 Pro Max" class="relative z-10 w-full max-w-[320px] lg:max-w-[400px] object-contain drop-shadow-2xl transform hover:scale-105 transition duration-700">
                     </div>
                 </div>
             </div>
@@ -184,9 +184,16 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
         <!-- VUE : A PROPOS -->
         <section id="vue-apropos" class="view-section pb-20">
             <div class="bg-black py-12 border-b border-white/5 mb-12"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><h1 class="text-4xl font-extrabold text-white mb-2 uppercase tracking-tight">À propos</h1></div></div>
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 id="ap-titre" class="text-3xl font-extrabold text-white mb-6"></h2>
-                <div id="ap-texte" class="text-gray-400 leading-relaxed space-y-4 max-w-3xl"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 id="ap-titre" class="text-3xl font-extrabold text-white mb-6"></h2>
+                        <div id="ap-texte" class="text-gray-400 leading-relaxed space-y-4"></div>
+                    </div>
+                    <div class="relative flex justify-center lg:justify-end">
+                        <img src="maro-profil.jpg" alt="Maro Brutaf Tech - Gérant" class="rounded-3xl border border-white/10 shadow-2xl object-cover max-w-full h-auto max-h-[500px]">
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -320,7 +327,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 <script>
 const $ = id => document.getElementById(id);
 const esc = s => {
-    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    const map = { '&': '&', '<': '<', '>': '>', '"': '"', "'": ''' };
     return String(s ?? '').replace(/[&<>"']/g, m => map[m]);
 };
 const fcfa = n => Number(n).toLocaleString("fr-FR") + " FCFA";
@@ -338,7 +345,8 @@ function ecrire(k, v){ try{ localStorage.setItem("maro_" + k, JSON.stringify(v))
 async function chargerDonnees(){
     panier = lire("c", []) || []; 
     const { data: dbProducts, error: errP } = await supabase.from('products').select('*').order('id', { ascending: false });
-    if (!errP && dbProducts) {
+    
+    if (!errP && dbProducts && dbProducts.length > 0) {
         produits = dbProducts.map(dbP => ({
             id: dbP.id, cat: dbP.category, marque: dbP.brand, modele: dbP.model, etat: dbP.condition_label,
             desc: dbP.description, image: dbP.image_url, 
@@ -348,7 +356,13 @@ async function chargerDonnees(){
             nouveau: dbP.is_new, troc: dbP.trade_in, visible: dbP.is_visible
         }));
     } else {
-        produits = [];
+        // Initialisation de produits factices (Android et Accessoires) si la base est vide
+        produits = [
+            {id: 901, cat: "android", marque: "Samsung", modele: "Galaxy S24 Ultra", etat: "neuf", desc: "Le summum d'Android avec stylet intégré.", image: "", specs: {SIM: "Dual SIM"}, cap: [{c: "256 Go", p: 850000, s: 5}], col: [{n: "Titane Noir", h: "#2b2b2b"}], nouveau: true, troc: true, visible: true},
+            {id: 902, cat: "android", marque: "Xiaomi", modele: "Redmi Note 13 Pro", etat: "neuf", desc: "Excellent rapport qualité/prix.", image: "", specs: {SIM: "Dual SIM"}, cap: [{c: "256 Go", p: 250000, s: 10}], col: [{n: "Noir", h: "#000000"}], nouveau: true, troc: false, visible: true},
+            {id: 903, cat: "accessoires", marque: "Apple", modele: "AirPods Pro 2", etat: "neuf", desc: "Réduction de bruit active exceptionnelle.", image: "", specs: {}, cap: [{c: "Standard", p: 180000, s: 15}], col: [{n: "Blanc", h: "#ffffff"}], nouveau: false, troc: false, visible: true},
+            {id: 904, cat: "accessoires", marque: "Générique", modele: "Chargeur Rapide 20W", etat: "neuf", desc: "Chargeur rapide compatible iPhone.", image: "", specs: {}, cap: [{c: "Standard", p: 15000, s: 50}], col: [{n: "Blanc", h: "#ffffff"}], nouveau: false, troc: false, visible: true}
+        ];
     }
 
     const { data: dbSettings, error: errS } = await supabase.from('store_settings').select('*').single();
@@ -366,7 +380,7 @@ async function chargerDonnees(){
 const prod = id => produits.find(x => x.id == id);
 const stockTot = p => p.cap.reduce((s, v) => s + (+v.s || 0), 0);
 const prixMin = p => { const a = p.cap.map(v => +v.p).filter(x => x > 0); return a.length ? Math.min(...a) : 0; };
-const libelle = l => { const p = prod(l.id), v = p.cap[l.vi]; return `${p.modele} (${v ? v.c : ''})`; };
+const libelle = l => { const p = prod(l.id), v = p.cap[l.vi]; return `${p.modele} (${v && v.c !== 'Standard' ? v.c : ''})`; };
 
 function handleRouting() {
     const hash = window.location.hash;
@@ -408,9 +422,16 @@ function afficherCatalogue(){
     const q = $("filtre-recherche").value.toLowerCase().trim(), etat = $("filtre-etat").value, max = +$("filtre-prix").value;
     $("filtres-pilules").innerHTML = [["tous","Tous"], ...Object.entries(CATS)].map(([k, t]) =>
         `<button data-cat="${k}" class="px-6 py-2 rounded-full text-sm ${k === categorieActive ? "bg-white text-black font-bold" : "border border-white/10 text-white hover:border-white"}">${t}</button>`).join("");
+    
     const r = produits.filter(p => p.visible !== false && (categorieActive === "tous" || p.cat === categorieActive)
         && (`${p.modele} ${p.marque}`).toLowerCase().includes(q) && (!etat || p.etat === etat) && (!max || !prixMin(p) || prixMin(p) <= max))
-        .sort((a, b) => (stockTot(a) === 0) - (stockTot(b) === 0));
+        .sort((a, b) => {
+            const outA = stockTot(a) === 0 ? 1 : 0;
+            const outB = stockTot(b) === 0 ? 1 : 0;
+            if (outA !== outB) return outA - outB; 
+            return a.modele.localeCompare(b.modele, 'fr', {numeric: true, sensitivity: 'base'});
+        });
+        
     $("compteur-produits").textContent = r.length + (r.length > 1 ? " produits" : " produit");
     $("grille-produits").innerHTML = r.length ? r.map(cartePure).join("") : '<p class="col-span-full py-16 text-center text-gray-500">Aucun produit trouvé.</p>';
 }
@@ -418,7 +439,9 @@ $("filtres-pilules").addEventListener("click", e => { const b = e.target.closest
 ["filtre-recherche","filtre-etat","filtre-prix"].forEach(i => $(i).addEventListener("input", afficherCatalogue));
 
 function afficherAccueil(){
-    const n = produits.filter(p => p.visible !== false && p.nouveau).slice(0, 4);
+    const n = produits.filter(p => p.visible !== false && p.nouveau)
+        .sort((a, b) => a.modele.localeCompare(b.modele, 'fr', {numeric: true, sensitivity: 'base'}))
+        .slice(0, 4);
     $("grille-nouveautes").innerHTML = n.length ? n.map(cartePure).join("") : '<p class="text-gray-500">Bientôt de nouveaux arrivages.</p>';
 }
 
