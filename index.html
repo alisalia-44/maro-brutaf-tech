@@ -121,7 +121,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                         <h2 class="text-3xl font-extrabold text-white uppercase tracking-wider mb-2">Retrouvez-nous</h2>
                         <p class="text-gray-400">Avenue de la nation, boutique 32 Devant la maison du peuple, Ouagadougou.<br>Le retrait en boutique est possible. Confirmez d'abord votre commande avec un conseiller.</p>
                     </div>
-                    <a href="https://maps.app.goo.gl/uqKZ1HAUBbzfySQY6" target="_blank" rel="noopener" class="btn b-gold whitespace-nowrap"><svg class="ic"><use href="#i-map"/></svg> Voir l'itinéraire</a>
+                    <a href="https://maps.app.goo.gl/KHYPfkxmZCDKHZuK7" target="_blank" rel="noopener" class="btn b-gold whitespace-nowrap"><svg class="ic"><use href="#i-map"/></svg> Voir l'itinéraire</a>
                 </div>
             </div>
 
@@ -191,7 +191,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                         <div id="ap-texte" class="text-gray-400 leading-relaxed space-y-4"></div>
                     </div>
                     <div class="relative flex justify-center lg:justify-end">
-                        <img src="maro-profil.jpg" alt="Maro Brutaf Tech - Gérant" class="rounded-3xl border border-white/10 shadow-2xl object-cover max-w-full h-auto max-h-[500px]">
+                        <img src="maro-profil.jpeg" alt="Maro Brutaf Tech - Gérant" class="rounded-3xl border border-white/10 shadow-2xl object-cover max-w-full h-auto max-h-[500px]">
                     </div>
                 </div>
             </div>
@@ -265,7 +265,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
                     <h3 class="text-white font-bold uppercase tracking-wider text-sm mb-4">Nous joindre</h3>
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li class="flex items-start gap-3"><svg class="ic mt-0.5 text-gold-500"><use href="#i-whatsapp"/></svg> +226 62 21 21 22</li>
-                        <li class="flex items-start gap-3"><svg class="ic mt-0.5 text-gold-500"><use href="#i-map"/></svg> <span>Avenue de la nation, boutique 32<br>Devant la maison du peuple, Ouagadougou<br><a href="https://maps.app.goo.gl/uqKZ1HAUBbzfySQY6" target="_blank" class="text-gold-500 hover:underline mt-1 inline-block">Voir l'itinéraire</a></span></li>
+                        <li class="flex items-start gap-3"><svg class="ic mt-0.5 text-gold-500"><use href="#i-map"/></svg> <span>Avenue de la nation, boutique 32<br>Devant la maison du peuple, Ouagadougou<br><a href="https://maps.app.goo.gl/KHYPfkxmZCDKHZuK7" target="_blank" class="text-gold-500 hover:underline mt-1 inline-block">Voir l'itinéraire</a></span></li>
                         <li class="flex items-start gap-3"><svg class="ic mt-0.5 text-gold-500"><use href="#i-clock"/></svg> Lun-Sam : 08h-20h</li>
                     </ul>
                 </div>
@@ -358,7 +358,6 @@ async function chargerDonnees(){
             nouveau: dbP.is_new, troc: dbP.trade_in, visible: dbP.is_visible
         }));
     } else {
-        // Initialisation de produits factices (Android et Accessoires) si la base est vide
         produits = [
             {id: 901, cat: "android", marque: "Samsung", modele: "Galaxy S24 Ultra", etat: "neuf", desc: "Le summum d'Android avec stylet intégré.", image: "", specs: {SIM: "Dual SIM"}, cap: [{c: "256 Go", p: 850000, s: 5}], col: [{n: "Titane Noir", h: "#2b2b2b"}], nouveau: true, troc: true, visible: true},
             {id: 902, cat: "android", marque: "Xiaomi", modele: "Redmi Note 13 Pro", etat: "neuf", desc: "Excellent rapport qualité/prix.", image: "", specs: {SIM: "Dual SIM"}, cap: [{c: "256 Go", p: 250000, s: 10}], col: [{n: "Noir", h: "#000000"}], nouveau: true, troc: false, visible: true},
@@ -459,7 +458,10 @@ function ouvrirDetails(id){
     $("dt-capacites").innerHTML = p.cap.map((v, i) => `<div><input type="radio" name="dt-cap" id="cap-${i}" class="cap-radio hidden" ${i === sel.vi ? "checked" : ""} onchange="choisir('vi',${i})"><label for="cap-${i}" class="cursor-pointer border border-white/20 rounded-lg px-4 py-2 text-sm font-medium text-gray-300 hover:border-gold-500 transition block ${+v.s > 0 ? "" : "opacity-50 line-through"}">${esc(v.c)}</label></div>`).join("");
     $("dt-bloc-couleur").classList.toggle("hidden", !p.col.length);
     $("dt-couleurs").innerHTML = p.col.map((c, i) => `<div><input type="radio" name="dt-col" id="col-${i}" class="color-radio hidden" ${i === 0 ? "checked" : ""} onchange="choisir('ci',${i})"><label for="col-${i}" title="${esc(c.n)}" class="cursor-pointer block w-8 h-8 rounded-full border border-white/10 transition" style="background-color:${esc(c.h)}"></label></div>`).join("");
-    $("dt-specs-list").innerHTML = Object.entries(p.specs || {}).map(([k, v]) => `<div class="flex border-b border-white/5 pb-4"><div class="w-1/3 text-gray-400 text-sm">${esc(k)}</div><div class="w-2/3 text-white text-sm font-medium">${esc(v)}</div></div>`).join("");
+    
+    const specsHTML = Object.entries(p.specs || {}).map(([k, v]) => `<div class="flex border-b border-white/5 pb-4"><div class="w-1/3 text-gray-400 text-sm">${esc(k)}</div><div class="w-2/3 text-white text-sm font-medium">${esc(v)}</div></div>`).join("");
+    $("dt-specs-list").innerHTML = specsHTML || '<p class="text-gray-500 text-sm italic">Aucune caractéristique spécifique renseignée pour ce modèle.</p>';
+    
     $("btn-dt-troc").style.display = p.troc ? "" : "none";
     majSelection(); window.location.hash = '#details';
 }
