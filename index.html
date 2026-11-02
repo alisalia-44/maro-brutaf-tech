@@ -326,9 +326,11 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(5px)}
 <script src="js/donnees.js?v=3"></script>
 <script>
 const $ = id => document.getElementById(id);
-const esc = s => {
-    const map = { '&': '&', '<': '<', '>': '>', '"': '"', "'": ''' };
-    return String(s ?? '').replace(/[&<>"']/g, m => map[m]);
+const esc = (s) => {
+    if (!s) return "";
+    const p = document.createElement("p");
+    p.textContent = s;
+    return p.innerHTML;
 };
 const fcfa = n => Number(n).toLocaleString("fr-FR") + " FCFA";
 const num = x => parseInt(String(x ?? "").replace(/\D/g, ""), 10) || 0;
